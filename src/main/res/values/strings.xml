@@ -1,0 +1,4 @@
+<resources>
+    <string name="error_message_min_length">Campo inválido. O número mínimo de caracteres é %1$d</string>
+    <string name="error_message_max_length">Campo inválido. O número máximo de caracteres é %1$d</string>
+</resources>
