@@ -8,11 +8,11 @@ import android.widget.TextView;
  */
 public class EditTextHandler {
 
-    public static void setError(TextView textView) {
+    public static void removeError(TextView textView) {
         setError(textView, null);
     }
 
-    private static void setError(TextView textView, String errorMessage) {
+    public static void setError(TextView textView, String errorMessage) {
         if(textView.getParent() instanceof TextInputLayout) {
             TextInputLayout textInputLayout = (TextInputLayout) textView.getParent();
             textInputLayout.setError(errorMessage);

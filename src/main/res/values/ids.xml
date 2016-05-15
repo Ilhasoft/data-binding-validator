@@ -2,6 +2,7 @@
 <resources>
     <item type="id" name="validator_min_length" />
     <item type="id" name="validator_max_length" />
+    <item type="id" name="validator_type" />
 
     <item type="id" name="hasValidation" />
 </resources>

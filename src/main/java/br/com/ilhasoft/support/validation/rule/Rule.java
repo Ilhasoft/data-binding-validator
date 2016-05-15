@@ -15,9 +15,7 @@ public abstract class Rule<ViewType extends View, ValueType> {
     }
 
     public final boolean validate(ViewType view) {
-        this.value = getRuleValue(view);
-        if(value == null)
-            return true;
+        if (!applyRule(view)) return true;
 
         boolean valid = isValid(view);
         if(valid) {
@@ -26,6 +24,11 @@ public abstract class Rule<ViewType extends View, ValueType> {
             onValidationFailed(view);
         }
         return valid;
+    }
+
+    protected boolean applyRule(ViewType view) {
+        this.value = getRuleValue(view);
+        return value != null;
     }
 
     protected abstract boolean isValid(ViewType view);
