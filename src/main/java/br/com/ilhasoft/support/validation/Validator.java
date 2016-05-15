@@ -41,20 +41,30 @@ public class Validator {
     }
 
     public boolean validate() {
-        boolean valid = true;
-
         List<View> viewWithValidations = getViewsWithValidation();
+        return isAllViewsValid(viewWithValidations);
+    }
+
+    private boolean isAllViewsValid(List<View> viewWithValidations) {
+        boolean allViewsValid = true;
         for (View viewWithValidation : viewWithValidations) {
-            for (Rule rule : rules) {
-                if(mode == FORM_VALIDATION_MODE) {
-                    valid = valid & rule.validate(viewWithValidation);
-                } else {
-                    valid = valid && rule.validate(viewWithValidation);
-                }
+            boolean viewValid = isViewValid(viewWithValidation);
+            allViewsValid = allViewsValid & viewValid;
+
+            if(mode == FIELD_VALIDATION_MODE && !viewValid) {
+                break;
             }
         }
+        return allViewsValid;
+    }
 
-        return valid;
+    private boolean isViewValid(View viewWithValidation) {
+        boolean viewValid = true;
+        for (Rule rule : rules) {
+            viewValid = rule.validate(viewWithValidation);
+            if(!viewValid) break;
+        }
+        return viewValid;
     }
 
     public void enableFormValidationMode() {
