@@ -1,5 +1,7 @@
 # IlhaSoft Support Validation Library
 
+[![Release](https://jitpack.io/v/org.bitbucket.ilhasoft/support-validation.svg?style=flat-square)](https://jitpack.io/#org.bitbucket.ilhasoft/support-validation)
+
 Biblioteca com objetivo de facilitar e agilizar a criação de formulários. 
 
 ## Recursos disponíveis:
