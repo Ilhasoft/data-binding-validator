@@ -13,8 +13,8 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class EmailTypeRule extends TypeRule {
 
-    public EmailTypeRule() {
-        super(FieldType.Email);
+    public EmailTypeRule(TextView view) {
+        super(view, FieldType.Email);
     }
 
     @Override

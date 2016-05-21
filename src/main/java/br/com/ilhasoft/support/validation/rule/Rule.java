@@ -7,16 +7,15 @@ import android.view.View;
  */
 public abstract class Rule<ViewType extends View, ValueType> {
 
-    protected final int ruleId;
     protected ValueType value;
+    protected ViewType view;
 
-    public Rule(int ruleId) {
-        this.ruleId = ruleId;
+    public Rule(ViewType view, ValueType value) {
+        this.view = view;
+        this.value = value;
     }
 
-    public final boolean validate(ViewType view) {
-        if (!applyRule(view)) return true;
-
+    public final boolean validate() {
         boolean valid = isValid(view);
         if(valid) {
             onValidationSucceeded(view);
@@ -26,20 +25,10 @@ public abstract class Rule<ViewType extends View, ValueType> {
         return valid;
     }
 
-    protected boolean applyRule(ViewType view) {
-        this.value = getRuleValue(view);
-        return value != null;
-    }
-
     protected abstract boolean isValid(ViewType view);
 
     protected void onValidationSucceeded(ViewType view) {}
 
     protected void onValidationFailed(ViewType view) {}
-
-    private ValueType getRuleValue(ViewType view) {
-        return (ValueType) view.getTag(ruleId);
-    }
-
 
 }

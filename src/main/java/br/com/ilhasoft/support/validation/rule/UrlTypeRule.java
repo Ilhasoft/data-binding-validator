@@ -11,8 +11,8 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class UrlTypeRule extends TypeRule {
 
-    public UrlTypeRule() {
-        super(FieldType.Url);
+    public UrlTypeRule(TextView textView) {
+        super(textView, FieldType.Url);
     }
 
     @Override

@@ -10,8 +10,8 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class MinLengthRule extends Rule<TextView, Integer> {
 
-    public MinLengthRule() {
-        super(R.id.validator_min_length);
+    public MinLengthRule(TextView view, Integer value) {
+        super(view, value);
     }
 
     @Override

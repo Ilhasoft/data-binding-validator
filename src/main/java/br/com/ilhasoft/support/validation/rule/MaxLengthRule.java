@@ -10,8 +10,8 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class MaxLengthRule extends Rule<TextView, Integer> {
 
-    public MaxLengthRule() {
-        super(R.id.validator_max_length);
+    public MaxLengthRule(TextView view, Integer value) {
+        super(view, value);
     }
 
     @Override

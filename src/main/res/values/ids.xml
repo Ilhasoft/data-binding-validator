@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item type="id" name="validator_min_length" />
-    <item type="id" name="validator_max_length" />
-    <item type="id" name="validator_type" />
-
-    <item type="id" name="hasValidation" />
+    <item type="id" name="validator_rule" />
 </resources>

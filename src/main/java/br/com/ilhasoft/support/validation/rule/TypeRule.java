@@ -2,6 +2,8 @@ package br.com.ilhasoft.support.validation.rule;
 
 import android.widget.TextView;
 
+import java.lang.reflect.InvocationTargetException;
+
 import br.com.ilhasoft.support.validation.R;
 
 /**
@@ -9,24 +11,30 @@ import br.com.ilhasoft.support.validation.R;
  */
 public abstract class TypeRule extends Rule<TextView, TypeRule.FieldType> {
 
-    private static final String TAG = "TypeRule";
-
-    private final FieldType type;
-
     public enum FieldType {
-        Email,
-        Url,
-        Credit_card,
-        None
+        Email(EmailTypeRule.class),
+        Url(UrlTypeRule.class),
+        None;
+
+        Class<? extends TypeRule> mClass;
+
+        FieldType(Class<? extends TypeRule> mClass) {
+            this.mClass = mClass;
+        }
+
+        FieldType() {}
+
+        public TypeRule instantiate(TextView view) throws NoSuchMethodException, IllegalAccessException
+                , InvocationTargetException, InstantiationException {
+            if(this != None) {
+                return mClass.getConstructor(TextView.class).newInstance(view);
+            }
+            throw new IllegalStateException("It's not possible to bind a none value type");
+        }
     }
 
-    public TypeRule(FieldType type) {
-        super(R.id.validator_type);
-        this.type = type;
+    public TypeRule(TextView view, FieldType value) {
+        super(view, value);
     }
 
-    @Override
-    protected boolean applyRule(TextView view) {
-        return super.applyRule(view) && value == type;
-    }
 }
