@@ -11,7 +11,7 @@ Biblioteca com objetivo de facilitar e agilizar a criação de formulários.
 
 ## Exemplo de utilização
 
-![Exemplo de utilização](http://s32.postimg.org/7tfrxtd9x/device_2016_05_15_105341.png =480x853)
+![Exemplo de utilização](http://s32.postimg.org/7tfrxtd9x/device_2016_05_15_105341.png)
 
 ## Como utilizar?
 
