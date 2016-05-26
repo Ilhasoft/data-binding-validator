@@ -12,6 +12,7 @@ import br.com.ilhasoft.support.validation.R;
 public abstract class TypeRule extends Rule<TextView, TypeRule.FieldType> {
 
     public enum FieldType {
+        Cpf(CpfTypeRule.class),
         Email(EmailTypeRule.class),
         Url(UrlTypeRule.class),
         None;
