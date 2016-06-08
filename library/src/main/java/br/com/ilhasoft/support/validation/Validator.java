@@ -53,7 +53,7 @@ public class Validator {
     }
 
     private boolean isRuleValid(Rule rule) {
-        return rule.validate() || disabledViews.contains(rule.getView());
+        return disabledViews.contains(rule.getView()) || rule.validate();
     }
 
     public void disableValidation(View view) {
