@@ -4,6 +4,8 @@ import android.databinding.BindingAdapter;
 import android.widget.TextView;
 
 import br.com.ilhasoft.support.validation.R;
+import br.com.ilhasoft.support.validation.rule.EmailTypeRule;
+import br.com.ilhasoft.support.validation.rule.EmptyRule;
 import br.com.ilhasoft.support.validation.rule.MaxLengthRule;
 import br.com.ilhasoft.support.validation.rule.MinLengthRule;
 import br.com.ilhasoft.support.validation.util.EditTextHandler;
@@ -24,6 +26,12 @@ public class LengthBindings {
     public static void bindingMaxLength(TextView view, int maxLength) {
         EditTextHandler.disableErrorOnChanged(view);
         ViewTagHelper.appendValue(R.id.validator_rule, view, new MaxLengthRule(view, maxLength));
+    }
+
+    @BindingAdapter({"validateEmpty"})
+    public static void bindingEmpty(TextView view, boolean empty) {
+        EditTextHandler.disableErrorOnChanged(view);
+        ViewTagHelper.appendValue(R.id.validator_rule, view, new EmptyRule(view, empty));
     }
 
 }
