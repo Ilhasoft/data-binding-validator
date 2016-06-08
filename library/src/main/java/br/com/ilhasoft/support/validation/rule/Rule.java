@@ -31,4 +31,7 @@ public abstract class Rule<ViewType extends View, ValueType> {
 
     protected void onValidationFailed(ViewType view) {}
 
+    public ViewType getView() {
+        return view;
+    }
 }

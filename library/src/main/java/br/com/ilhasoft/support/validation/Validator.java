@@ -5,7 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import br.com.ilhasoft.support.validation.rule.Rule;
 import br.com.ilhasoft.support.validation.util.ViewTagHelper;
@@ -21,9 +23,11 @@ public class Validator {
     private ViewDataBinding target;
 
     private int mode = FIELD_VALIDATION_MODE;
+    private final Set<View> disabledViews;
 
     public Validator(ViewDataBinding target) {
         this.target = target;
+        this.disabledViews = new HashSet<>();
     }
 
     public boolean validate() {
@@ -37,7 +41,7 @@ public class Validator {
             boolean viewValid = true;
             List<Rule> rules = (List) viewWithValidation.getTag(R.id.validator_rule);
             for (Rule rule : rules) {
-                viewValid = viewValid && rule.validate();
+                viewValid = viewValid && isRuleValid(rule);
                 allViewsValid = allViewsValid && viewValid;
             }
 
@@ -46,6 +50,18 @@ public class Validator {
             }
         }
         return allViewsValid;
+    }
+
+    private boolean isRuleValid(Rule rule) {
+        return rule.validate() || disabledViews.contains(rule.getView());
+    }
+
+    public void disableValidation(View view) {
+        disabledViews.add(view);
+    }
+
+    public void enableValidation(View view) {
+        disabledViews.remove(view);
     }
 
     public void enableFormValidationMode() {
