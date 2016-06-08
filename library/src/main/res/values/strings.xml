@@ -6,4 +6,5 @@
     <string name="error_message_cpf_validation">Formato do CPF inválido</string>
     <string name="error_message_url_validation">Formato da url inválida</string>
     <string name="error_message_credit_card_validation">Formato do cartão de crédito inválido</string>
+    <string name="error_message_empty_validation">Esse campo não pode ser vazio</string>
 </resources>
