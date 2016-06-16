@@ -15,6 +15,7 @@ public abstract class TypeRule extends Rule<TextView, TypeRule.FieldType> {
         Cpf(CpfTypeRule.class),
         Email(EmailTypeRule.class),
         Url(UrlTypeRule.class),
+        CreditCard(CreditCardTypeRule.class),
         None;
 
         Class<? extends TypeRule> mClass;
