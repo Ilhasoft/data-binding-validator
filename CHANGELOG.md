@@ -1,9 +1,13 @@
 # IlhaSoft Support Validation CHANGELOG
 
+## Version 0.4.1 (2016-06-16)
+
+* Fixed credit card validation with white spaces
+
 ## Version 0.4.0 (2016-06-16)
 
-* Add validators for date by pattern
-* Add credit card type validation
+* Added validators for date by pattern
+* Added credit card type validation
 
 ## Version 0.3.1 (2016-06-08)
 
