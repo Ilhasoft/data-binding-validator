@@ -1,5 +1,10 @@
 # IlhaSoft Support Validation CHANGELOG
 
+## Version 0.4.0 (2016-06-16)
+
+* Add validators for date by pattern
+* Add credit card type validation
+
 ## Version 0.3.1 (2016-06-08)
 
 * Fixed validation order
