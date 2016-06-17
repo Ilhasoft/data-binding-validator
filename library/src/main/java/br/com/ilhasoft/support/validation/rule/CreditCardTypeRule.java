@@ -18,7 +18,7 @@ public class CreditCardTypeRule extends TypeRule {
     @Override
     protected boolean isValid(TextView view) {
         CreditCardValidator creditCardValidator = new CreditCardValidator();
-        return creditCardValidator.isValid(view.getText().toString());
+        return creditCardValidator.isValid(view.getText().toString().replaceAll("\\s", ""));
     }
 
     @Override
