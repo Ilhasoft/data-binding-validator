@@ -16,26 +16,27 @@ public class CpfTypeRule extends TypeRule {
 
     @Override
     protected boolean isValid(TextView view) {
-        if (view.getText().toString().trim().replaceAll("[^\\d]", "").length() < 11)
-            return false;
-
-        String rawCPF = view.getText().toString().trim().replaceAll("[^\\d]", "");
-
-        int stepOne = (cpfSum(rawCPF, 1) * 10) % 11;
-        int stepTwo = (cpfSum(rawCPF, 2) * 10) % 11;
-
-        return  (stepOne == Character.getNumericValue(rawCPF.charAt(9))
-                && stepTwo == Character.getNumericValue(rawCPF.charAt(10)));
+        final String rawCpf = view.getText().toString().trim().replaceAll("[^\\d]", "");
+        return rawCpf.length() == 11
+                && (cpfDv(rawCpf, 1) == Character.getNumericValue(rawCpf.charAt(9))
+                && cpfDv(rawCpf, 2) == Character.getNumericValue(rawCpf.charAt(10)));
     }
 
     /**
      *
-     * @param rawCPF raw CPF with length equal to 11.
+     * @param rawCpf raw CPF with length equal to 11.
      * @param step 1 or 2.
      * @return verification sum.
      */
-    private int cpfSum(String rawCPF, int step) {
-        int sum = 0, count = 8 + step, baseMultiplier = 9 + step;
+    private int cpfDv(final String rawCpf, final int step) {
+        final int dv = 11 - cpfSum(rawCpf, step) % 11;
+        return (dv == 10 || dv == 11) ? 0 : dv;
+    }
+
+    private int cpfSum(final String rawCPF, final int step) {
+        int sum = 0;
+        final int count = 8 + step;
+        final int baseMultiplier = 9 + step;
         for (int i = 0; i < count; ++i) {
             sum += ((baseMultiplier - i) * Character.getNumericValue(rawCPF.charAt(i)));
         }
