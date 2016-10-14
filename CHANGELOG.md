@@ -1,5 +1,13 @@
 # IlhaSoft Support Validation CHANGELOG
 
+## Version 0.4.3 (2016-10-14)
+
+* Fixed problem with CPF validation
+
+## Version 0.4.2 (2016-10-03)
+
+* Remove unused groups on commons validation
+
 ## Version 0.4.1 (2016-06-16)
 
 * Fixed credit card validation with white spaces
