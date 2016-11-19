@@ -16,8 +16,8 @@ public abstract class Rule<ViewType extends View, ValueType> {
     }
 
     public final boolean validate() {
-        boolean valid = isValid(view);
-        if(valid) {
+        final boolean valid = isValid(view);
+        if (valid) {
             onValidationSucceeded(view);
         } else {
             onValidationFailed(view);
