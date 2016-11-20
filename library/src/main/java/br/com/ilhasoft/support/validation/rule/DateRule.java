@@ -12,13 +12,15 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class DateRule extends Rule<TextView, String> {
 
+    private final DateValidator dateValidator;
+
     public DateRule(TextView view, String value) {
         super(view, value);
+        dateValidator = new DateValidator();
     }
 
     @Override
     public boolean isValid(TextView view) {
-        DateValidator dateValidator = new DateValidator();
         return dateValidator.isValid(view.getText().toString(), value);
     }
 

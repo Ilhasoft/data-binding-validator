@@ -14,16 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.ilhasoft.support.validation.util;
+package org.apache.commons.validator.routines;
 
-import org.apache.commons.validator.routines.CodeValidator;
-import org.apache.commons.validator.routines.RegexValidator;
 import org.apache.commons.validator.routines.checkdigit.CheckDigit;
 import org.apache.commons.validator.routines.checkdigit.LuhnCheckDigit;
-
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Perform credit card validations.
@@ -48,11 +46,11 @@ import java.util.List;
  * <p>
  * For a similar implementation in Perl, reference Sean M. Burke's
  * <a href="http://www.speech.cs.cmu.edu/~sburke/pub/luhn_lib.html">script</a>.
- * More information can be found in Michael Gilleland's essay
+ * More information can be found in Michael Gilleland's essay 
  * <a href="http://web.archive.org/web/20120614072656/http://www.merriampark.com/anatomycc.htm">Anatomy of Credit Card Numbers</a>.
  * </p>
  *
- * @version $Revision$
+ * @version $Revision: 1739207 $
  * @since Validator 1.4
  */
 public class CreditCardValidator implements Serializable {
@@ -92,17 +90,31 @@ public class CreditCardValidator implements Serializable {
     /**
      * Option specifying that Discover cards are allowed.
      */
-    public static final long DISCOVER = 1 << 3;
+    public static final long DISCOVER = 1 << 3; // CHECKSTYLE IGNORE MagicNumber
 
     /**
      * Option specifying that Diners cards are allowed.
      */
-    public static final long DINERS = 1 << 4;
+    public static final long DINERS = 1 << 4; // CHECKSTYLE IGNORE MagicNumber
+
+    /**
+     * Option specifying that VPay (Visa) cards are allowed.
+     * @since 1.5.0
+     */
+    public static final long VPAY = 1 << 5; // CHECKSTYLE IGNORE MagicNumber
+
+    /**
+     * Option specifying that Mastercard cards (pre Oct 2016 only) are allowed.
+     * @deprecated for use until Oct 2016 only
+     */
+    @Deprecated
+    public static final long MASTERCARD_PRE_OCT2016 = 1 << 6; // CHECKSTYLE IGNORE MagicNumber
+
 
     /**
      * The CreditCardTypes that are allowed to pass validation.
      */
-    private final List cardTypes = new ArrayList();
+    private final List<CodeValidator> cardTypes = new ArrayList<CodeValidator>();
 
     /**
      * Luhn checkdigit validator for the card numbers.
@@ -121,14 +133,41 @@ public class CreditCardValidator implements Serializable {
     /** Discover Card Validator */
     public static final CodeValidator DISCOVER_VALIDATOR = new CodeValidator(DISCOVER_REGEX, LUHN_VALIDATOR);
 
+    /** Mastercard regular expressions */
+    private static final RegexValidator MASTERCARD_REGEX = new RegexValidator(
+        new String[] {
+            "^(5[1-5]\\d{14})$",  // 51 - 55 (pre Oct 2016)
+            // valid from October 2016
+            "^(2221\\d{12})$",    // 222100 - 222199
+            "^(222[2-9]\\d{12})$",// 222200 - 222999
+            "^(22[3-9]\\d{13})$", // 223000 - 229999
+            "^(2[3-6]\\d{14})$",  // 230000 - 269999
+            "^(27[01]\\d{13})$",  // 270000 - 271999
+            "^(2720\\d{12})$",    // 272000 - 272099
+        });
+
     /** Mastercard Card Validator */
-    public static final CodeValidator MASTERCARD_VALIDATOR = new CodeValidator("^(5[1-5]\\d{14})$", LUHN_VALIDATOR);
+    public static final CodeValidator MASTERCARD_VALIDATOR = new CodeValidator(MASTERCARD_REGEX, LUHN_VALIDATOR);
+
+    /** 
+     * Mastercard Card Validator (pre Oct 2016)
+     * @deprecated for use until Oct 2016 only
+     */
+    @Deprecated
+    public static final CodeValidator MASTERCARD_VALIDATOR_PRE_OCT2016 = new CodeValidator("^(5[1-5]\\d{14})$", LUHN_VALIDATOR);
 
     /** Visa Card Validator */
     public static final CodeValidator VISA_VALIDATOR = new CodeValidator("^(4)(\\d{12}|\\d{15})$", LUHN_VALIDATOR);
 
+    /** VPay (Visa) Card Validator 
+     * @since 1.5.0
+     */
+    public static final CodeValidator VPAY_VALIDATOR = new CodeValidator("^(4)(\\d{12,18})$", LUHN_VALIDATOR);
+
     /**
      * Create a new CreditCardValidator with default options.
+     * The default options are:
+     * AMEX, VISA, MASTERCARD and DISCOVER
      */
     public CreditCardValidator() {
         this(AMEX + VISA + MASTERCARD + DISCOVER);
@@ -147,12 +186,20 @@ public class CreditCardValidator implements Serializable {
             this.cardTypes.add(VISA_VALIDATOR);
         }
 
+        if (isOn(options, VPAY)) {
+            this.cardTypes.add(VPAY_VALIDATOR);
+        }
+
         if (isOn(options, AMEX)) {
             this.cardTypes.add(AMEX_VALIDATOR);
         }
 
         if (isOn(options, MASTERCARD)) {
             this.cardTypes.add(MASTERCARD_VALIDATOR);
+        }
+
+        if (isOn(options, MASTERCARD_PRE_OCT2016)) {
+            this.cardTypes.add(MASTERCARD_VALIDATOR_PRE_OCT2016);
         }
 
         if (isOn(options, DISCOVER)) {
@@ -172,9 +219,7 @@ public class CreditCardValidator implements Serializable {
         if (creditCardValidators == null) {
             throw new IllegalArgumentException("Card validators are missing");
         }
-        for (int i = 0; i < creditCardValidators.length; i++) {
-            cardTypes.add(creditCardValidators[i]);
-        }
+        Collections.addAll(cardTypes, creditCardValidators);
     }
 
     /**
@@ -186,9 +231,8 @@ public class CreditCardValidator implements Serializable {
         if (card == null || card.length() == 0) {
             return false;
         }
-        for (int i = 0; i < cardTypes.size(); i++) {
-            CodeValidator type = (CodeValidator)cardTypes.get(i);
-            if (type.isValid(card)) {
+        for (CodeValidator cardType : cardTypes) {
+            if (cardType.isValid(card)) {
                 return true;
             }
         }
@@ -206,16 +250,15 @@ public class CreditCardValidator implements Serializable {
             return null;
         }
         Object result = null;
-        for (int i = 0; i < cardTypes.size(); i++) {
-            CodeValidator type = (CodeValidator)cardTypes.get(i);
-            result = type.validate(card);
+        for (CodeValidator cardType : cardTypes) {
+            result = cardType.validate(card);
             if (result != null) {
-                return result ;
+                return result;
             }
         }
         return null;
-    }
 
+    }
     /**
      * Tests whether the given flag is on.  If the flag is not a power of 2
      * (ie. 3) this tests whether the combination of flags is on.
