@@ -2,9 +2,7 @@ package br.com.ilhasoft.support.validation.rule;
 
 import android.widget.TextView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+import org.apache.commons.validator.routines.DateValidator;
 
 import br.com.ilhasoft.support.validation.R;
 import br.com.ilhasoft.support.validation.util.EditTextHandler;
@@ -14,17 +12,16 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class DateRule extends Rule<TextView, String> {
 
+    private final DateValidator dateValidator;
+
     public DateRule(TextView view, String value) {
         super(view, value);
+        dateValidator = new DateValidator();
     }
 
     @Override
     public boolean isValid(TextView view) {
-        try {
-            return new SimpleDateFormat(value, Locale.getDefault()).parse(view.getText().toString()) != null;
-        } catch (ParseException e) {
-            return false;
-        }
+        return dateValidator.isValid(view.getText().toString(), value);
     }
 
     @Override
