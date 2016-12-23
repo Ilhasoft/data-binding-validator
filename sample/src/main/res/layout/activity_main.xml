@@ -133,8 +133,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Confirm password"
                     android:inputType="textPassword"
-                    app:validatePassword="@{ password }"
-                    app:errorMessage='@{"Mensagem de erro customizada"}'/>
+                    app:validatePassword="@{ password }"/>
             </android.support.design.widget.TextInputLayout>
 
             <Button
