@@ -14,11 +14,11 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
  */
 public class PasswordBindings {
 
-    @BindingAdapter(value = {"validatePassword", "errorMessage"}, requireAll = false)
-    public static void bindingDate(TextView view, TextView comparableView, String errorMessage) {
+    @BindingAdapter("validatePassword")
+    public static void bindingDate(TextView view, TextView comparableView) {
         EditTextHandler.disableErrorOnChanged(view);
         ViewTagHelper.appendValue(R.id.validator_rule, view,
-                new ConfirmPasswordRule(view, comparableView, errorMessage));
+                new ConfirmPasswordRule(view, comparableView));
     }
 
 }
