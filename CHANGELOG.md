@@ -1,5 +1,20 @@
 # IlhaSoft Support Validation CHANGELOG
 
+## Version 0.5.0 (2016-10-14)
+
+* Implemented password validation
+* Created ES and EN translation
+* Updated build tools and support libraries
+
+## Version 0.4.5 (2016-10-14)
+
+* Fix error messages on **TextInputLayout**
+## Version 0.4.4 (2016-10-14)
+
+* Updated DateRule to don't use apache validator library
+* Removed the dependency of the entire Apache validator library
+* Fixed implementation of `disableErrorOnChanged` method
+
 ## Version 0.4.3 (2016-10-14)
 
 * Fixed problem with CPF validation
