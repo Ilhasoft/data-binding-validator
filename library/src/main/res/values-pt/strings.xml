@@ -10,4 +10,5 @@
     <string name="error_message_credit_card_validation">Formato do cartão de crédito inválido</string>
     <string name="error_message_empty_validation">Esse campo não pode ser vazio</string>
     <string name="error_message_not_equal_password">As senhas não são iguais</string>
+    <string name="error_message_username_validation">Formato de nome de usuário inválido</string>
 </resources>

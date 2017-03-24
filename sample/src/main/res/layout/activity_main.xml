@@ -24,7 +24,9 @@
                     android:layout_height="wrap_content"
                     android:hint="Name"
                     app:validateMinLength="@{4}"
-                    app:validateMaxLength="@{10}"/>
+                    app:validateMinLengthMessage="@{@string/custom_error_min_length}"
+                    app:validateMaxLength="@{10}"
+                    app:validateMaxLengthMessage="@{@string/custom_error_max_length}"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -60,7 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="CPF"
-                    app:validateType='@{"cpf"}' />
+                    app:validateType='@{"cpf"}'
+                    app:validateTypeMessage="@{@string/custom_error_cpf}"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -86,7 +89,8 @@
                     android:hint="Year"
                     android:maxLength="4"
                     android:inputType="number"
-                    app:validateDate='@{"yyyy"}' />
+                    app:validateDate='@{"yyyy"}'
+                    app:validateDateMessage="@{@string/custom_error_date}"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -133,7 +137,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Confirm password"
                     android:inputType="textPassword"
-                    app:validatePassword="@{ password }"/>
+                    app:validatePassword="@{password}"
+                    app:validatePasswordMessage="@{@string/custom_error_password_not_equal}"/>
             </android.support.design.widget.TextInputLayout>
 
             <Button

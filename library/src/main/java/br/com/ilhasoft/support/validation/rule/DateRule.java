@@ -4,7 +4,6 @@ import android.widget.TextView;
 
 import org.apache.commons.validator.routines.DateValidator;
 
-import br.com.ilhasoft.support.validation.R;
 import br.com.ilhasoft.support.validation.util.EditTextHandler;
 
 /**
@@ -14,8 +13,8 @@ public class DateRule extends Rule<TextView, String> {
 
     private final DateValidator dateValidator;
 
-    public DateRule(TextView view, String value) {
-        super(view, value);
+    public DateRule(TextView view, String value, String errorMessage) {
+        super(view, value, errorMessage);
         dateValidator = new DateValidator();
     }
 
@@ -31,6 +30,6 @@ public class DateRule extends Rule<TextView, String> {
 
     @Override
     public void onValidationFailed(TextView view) {
-        EditTextHandler.setError(view, view.getContext().getString(R.string.error_message_date_validation));
+        EditTextHandler.setError(view, errorMessage);
     }
 }

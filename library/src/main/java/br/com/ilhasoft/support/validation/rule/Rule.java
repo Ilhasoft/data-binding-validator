@@ -9,10 +9,12 @@ public abstract class Rule<ViewType extends View, ValueType> {
 
     protected ValueType value;
     protected ViewType view;
+    protected String errorMessage;
 
-    public Rule(ViewType view, ValueType value) {
+    public Rule(ViewType view, ValueType value, String errorMessage) {
         this.view = view;
         this.value = value;
+        this.errorMessage = errorMessage;
     }
 
     public final boolean validate() {

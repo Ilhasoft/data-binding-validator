@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Support Validation</string>
+    <string name="custom_error_password_not_equal">Custom message: passwords are not equals!!</string>
+    <string name="custom_error_cpf">Custom message: CPF is wrong man!</string>
+    <string name="custom_error_date">Custom message: It\'s not a date!</string>
+    <string name="custom_error_min_length">Custom message: This message is too small!</string>
+    <string name="custom_error_max_length">Custom message: This message is too big!</string>
 </resources>

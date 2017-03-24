@@ -6,6 +6,7 @@ import android.widget.TextView;
 import br.com.ilhasoft.support.validation.R;
 import br.com.ilhasoft.support.validation.rule.ConfirmPasswordRule;
 import br.com.ilhasoft.support.validation.util.EditTextHandler;
+import br.com.ilhasoft.support.validation.util.ErrorMessageHelper;
 import br.com.ilhasoft.support.validation.util.ViewTagHelper;
 
 /**
@@ -13,11 +14,14 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
  */
 public class PasswordBindings {
 
-    @BindingAdapter("validatePassword")
-    public static void bindingPassword(TextView view, TextView comparableView) {
+    @BindingAdapter(value = {"validatePassword", "validatePasswordMessage"}, requireAll = false)
+    public static void bindingPassword(TextView view, TextView comparableView, String errorMessage) {
         EditTextHandler.disableErrorOnChanged(view);
+
+        String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
+                errorMessage, R.string.error_message_not_equal_password);
         ViewTagHelper.appendValue(R.id.validator_rule, view,
-                new ConfirmPasswordRule(view, comparableView));
+                new ConfirmPasswordRule(view, comparableView, handledErrorMessage));
     }
 
 }

@@ -9,6 +9,7 @@ import br.com.ilhasoft.support.validation.rule.EmptyRule;
 import br.com.ilhasoft.support.validation.rule.MaxLengthRule;
 import br.com.ilhasoft.support.validation.rule.MinLengthRule;
 import br.com.ilhasoft.support.validation.util.EditTextHandler;
+import br.com.ilhasoft.support.validation.util.ErrorMessageHelper;
 import br.com.ilhasoft.support.validation.util.ViewTagHelper;
 
 /**
@@ -16,22 +17,31 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
  */
 public class LengthBindings {
 
-    @BindingAdapter({"validateMinLength"})
-    public static void bindingMinLength(TextView view, int minLength) {
+    @BindingAdapter(value = {"validateMinLength", "validateMinLengthMessage"}, requireAll = false)
+    public static void bindingMinLength(TextView view, int minLength, CharSequence errorMessage) {
         EditTextHandler.disableErrorOnChanged(view);
-        ViewTagHelper.appendValue(R.id.validator_rule, view, new MinLengthRule(view, minLength));
+
+        String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
+                errorMessage, R.string.error_message_min_length, minLength);
+        ViewTagHelper.appendValue(R.id.validator_rule, view, new MinLengthRule(view, minLength, handledErrorMessage));
     }
 
-    @BindingAdapter({"validateMaxLength"})
-    public static void bindingMaxLength(TextView view, int maxLength) {
+    @BindingAdapter(value = {"validateMaxLength", "validateMaxLengthMessage"}, requireAll = false)
+    public static void bindingMaxLength(TextView view, int maxLength, CharSequence errorMessage) {
         EditTextHandler.disableErrorOnChanged(view);
-        ViewTagHelper.appendValue(R.id.validator_rule, view, new MaxLengthRule(view, maxLength));
+
+        String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
+                errorMessage, R.string.error_message_max_length, maxLength);
+        ViewTagHelper.appendValue(R.id.validator_rule, view, new MaxLengthRule(view, maxLength, handledErrorMessage));
     }
 
-    @BindingAdapter({"validateEmpty"})
-    public static void bindingEmpty(TextView view, boolean empty) {
+    @BindingAdapter(value = {"validateEmpty", "validateEmptyMessage"}, requireAll = false)
+    public static void bindingEmpty(TextView view, boolean empty, CharSequence errorMessage) {
         EditTextHandler.disableErrorOnChanged(view);
-        ViewTagHelper.appendValue(R.id.validator_rule, view, new EmptyRule(view, empty));
+
+        String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
+                errorMessage, R.string.error_message_empty_validation);
+        ViewTagHelper.appendValue(R.id.validator_rule, view, new EmptyRule(view, empty, handledErrorMessage));
     }
 
 }

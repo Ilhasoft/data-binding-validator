@@ -4,7 +4,6 @@ import android.widget.TextView;
 
 import org.apache.commons.validator.routines.CreditCardValidator;
 
-import br.com.ilhasoft.support.validation.R;
 import br.com.ilhasoft.support.validation.util.EditTextHandler;
 
 /**
@@ -14,8 +13,8 @@ public class CreditCardTypeRule extends TypeRule {
 
     private final CreditCardValidator creditCardValidator;
 
-    public CreditCardTypeRule(TextView view) {
-        super(view, FieldType.CreditCard);
+    public CreditCardTypeRule(TextView view, String errorMessage) {
+        super(view, FieldType.CreditCard, errorMessage);
         creditCardValidator = new CreditCardValidator();
     }
 
@@ -33,7 +32,7 @@ public class CreditCardTypeRule extends TypeRule {
     @Override
     protected void onValidationFailed(TextView view) {
         super.onValidationFailed(view);
-        EditTextHandler.setError(view, view.getContext().getString(R.string.error_message_credit_card_validation));
+        EditTextHandler.setError(view, errorMessage);
     }
 
 }

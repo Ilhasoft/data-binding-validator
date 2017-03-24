@@ -10,8 +10,8 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class MaxLengthRule extends Rule<TextView, Integer> {
 
-    public MaxLengthRule(TextView view, Integer value) {
-        super(view, value);
+    public MaxLengthRule(TextView view, Integer value, String errorMessage) {
+        super(view, value, errorMessage);
     }
 
     @Override
@@ -26,6 +26,6 @@ public class MaxLengthRule extends Rule<TextView, Integer> {
 
     @Override
     public void onValidationFailed(TextView view) {
-        EditTextHandler.setError(view, view.getContext().getString(R.string.error_message_max_length, value));
+        EditTextHandler.setError(view, errorMessage);
     }
 }

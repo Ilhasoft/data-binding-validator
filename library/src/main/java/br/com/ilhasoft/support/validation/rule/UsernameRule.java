@@ -1,26 +1,23 @@
 package br.com.ilhasoft.support.validation.rule;
 
-import android.util.Patterns;
 import android.widget.TextView;
-
-import java.util.regex.Pattern;
 
 import br.com.ilhasoft.support.validation.R;
 import br.com.ilhasoft.support.validation.util.EditTextHandler;
 
 /**
- * Created by john-mac on 5/14/16.
+ * Created by john-mac on 3/24/17.
  */
-public class EmailTypeRule extends TypeRule {
+public class UsernameRule extends TypeRule {
 
-    public EmailTypeRule(TextView view, String errorMessage) {
-        super(view, FieldType.Email, errorMessage);
+    public UsernameRule(TextView view, String errorMessage) {
+        super(view, FieldType.Username, errorMessage);
     }
 
     @Override
     protected boolean isValid(TextView view) {
-        Pattern emailPattern = Patterns.EMAIL_ADDRESS;
-        return emailPattern.matcher(view.getText()).matches();
+        String username = view.getText().toString();
+        return username.matches("^[a-z0-9_-]{3,16}$");
     }
 
     @Override

@@ -11,8 +11,8 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class EmptyRule extends Rule<TextView, Boolean> {
 
-    public EmptyRule(TextView view, Boolean value) {
-        super(view, value);
+    public EmptyRule(TextView view, Boolean value, String errorMessage) {
+        super(view, value, errorMessage);
     }
 
     @Override
@@ -27,6 +27,6 @@ public class EmptyRule extends Rule<TextView, Boolean> {
 
     @Override
     public void onValidationFailed(TextView view) {
-        EditTextHandler.setError(view, view.getContext().getString(R.string.error_message_empty_validation));
+        EditTextHandler.setError(view, errorMessage);
     }
 }

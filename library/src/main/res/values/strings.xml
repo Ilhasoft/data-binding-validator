@@ -5,6 +5,7 @@
     <string name="error_message_date_validation">Invalid data format</string>
 
     <string name="error_message_email_validation">Invalid email format</string>
+    <string name="error_message_username_validation">Invalid username format</string>
     <string name="error_message_cpf_validation">Invalid CPF format</string>
     <string name="error_message_url_validation">Invalid url format</string>
     <string name="error_message_credit_card_validation">Invalid credit card format</string>

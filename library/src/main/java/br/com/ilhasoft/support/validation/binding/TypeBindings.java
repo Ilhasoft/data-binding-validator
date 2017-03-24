@@ -2,19 +2,12 @@ package br.com.ilhasoft.support.validation.binding;
 
 import android.databinding.BindingAdapter;
 import android.support.annotation.NonNull;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
-import java.lang.reflect.InvocationTargetException;
-
 import br.com.ilhasoft.support.validation.R;
-import br.com.ilhasoft.support.validation.rule.EmailTypeRule;
 import br.com.ilhasoft.support.validation.rule.TypeRule;
-import br.com.ilhasoft.support.validation.rule.UrlTypeRule;
 import br.com.ilhasoft.support.validation.util.EditTextHandler;
+import br.com.ilhasoft.support.validation.util.ErrorMessageHelper;
 import br.com.ilhasoft.support.validation.util.ViewTagHelper;
 
 /**
@@ -22,12 +15,14 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
  */
 public class TypeBindings {
 
-    @BindingAdapter({"validateType"})
-    public static void bindingTypeValidation(TextView view, String fieldTypeText) {
+    @BindingAdapter(value = {"validateType", "validateTypeMessage"}, requireAll = false)
+    public static void bindingTypeValidation(TextView view, String fieldTypeText, String errorMessage) {
         EditTextHandler.disableErrorOnChanged(view);
         TypeRule.FieldType fieldType = getFieldTypeByText(fieldTypeText);
         try {
-            ViewTagHelper.appendValue(R.id.validator_rule, view, fieldType.instantiate(view));
+            String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
+                    errorMessage, fieldType.errorMessageId);
+            ViewTagHelper.appendValue(R.id.validator_rule, view, fieldType.instantiate(view, handledErrorMessage));
         } catch (Exception ignored) {}
     }
 

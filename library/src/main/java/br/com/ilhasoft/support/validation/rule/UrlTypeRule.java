@@ -11,8 +11,8 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class UrlTypeRule extends TypeRule {
 
-    public UrlTypeRule(TextView textView) {
-        super(textView, FieldType.Url);
+    public UrlTypeRule(TextView textView, String errorMessage) {
+        super(textView, FieldType.Url, errorMessage);
     }
 
     @Override
@@ -29,6 +29,6 @@ public class UrlTypeRule extends TypeRule {
     @Override
     protected void onValidationFailed(TextView view) {
         super.onValidationFailed(view);
-        EditTextHandler.setError(view, view.getContext().getString(R.string.error_message_url_validation));
+        EditTextHandler.setError(view, errorMessage);
     }
 }

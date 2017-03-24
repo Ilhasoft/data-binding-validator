@@ -10,8 +10,8 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class ConfirmPasswordRule extends Rule<TextView, TextView> {
 
-    public ConfirmPasswordRule(TextView view, TextView value) {
-        super(view, value);
+    public ConfirmPasswordRule(TextView view, TextView value, String errorMessage) {
+        super(view, value, errorMessage);
     }
 
     @Override
@@ -30,7 +30,6 @@ public class ConfirmPasswordRule extends Rule<TextView, TextView> {
 
     @Override
     public void onValidationFailed(TextView view) {
-        final String message = view.getContext().getString(R.string.error_message_not_equal_password);
-        EditTextHandler.setError(view, message);
+        EditTextHandler.setError(view, errorMessage);
     }
 }

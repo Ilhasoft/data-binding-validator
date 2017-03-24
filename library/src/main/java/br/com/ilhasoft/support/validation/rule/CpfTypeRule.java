@@ -2,7 +2,6 @@ package br.com.ilhasoft.support.validation.rule;
 
 import android.widget.TextView;
 
-import br.com.ilhasoft.support.validation.R;
 import br.com.ilhasoft.support.validation.util.EditTextHandler;
 
 /**
@@ -10,8 +9,8 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class CpfTypeRule extends TypeRule {
 
-    public CpfTypeRule(TextView view) {
-        super(view, FieldType.Cpf);
+    public CpfTypeRule(TextView view, String errorMessage) {
+        super(view, FieldType.Cpf, errorMessage);
     }
 
     @Override
@@ -52,6 +51,6 @@ public class CpfTypeRule extends TypeRule {
     @Override
     protected void onValidationFailed(TextView view) {
         super.onValidationFailed(view);
-        EditTextHandler.setError(view, view.getContext().getString(R.string.error_message_cpf_validation));
+        EditTextHandler.setError(view, errorMessage);
     }
 }
