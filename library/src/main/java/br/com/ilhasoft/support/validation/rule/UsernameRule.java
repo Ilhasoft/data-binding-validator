@@ -17,7 +17,7 @@ public class UsernameRule extends TypeRule {
     @Override
     protected boolean isValid(TextView view) {
         String username = view.getText().toString();
-        return username.matches("^[a-z0-9_-]{3,16}$");
+        return username.matches("[a-zA-Z0-9-._]+");
     }
 
     @Override
