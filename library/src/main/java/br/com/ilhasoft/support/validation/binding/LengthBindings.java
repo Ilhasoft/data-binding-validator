@@ -18,7 +18,7 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
 public class LengthBindings {
 
     @BindingAdapter(value = {"validateMinLength", "validateMinLengthMessage"}, requireAll = false)
-    public static void bindingMinLength(TextView view, int minLength, CharSequence errorMessage) {
+    public static void bindingMinLength(TextView view, int minLength, String errorMessage) {
         EditTextHandler.disableErrorOnChanged(view);
 
         String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
@@ -27,7 +27,7 @@ public class LengthBindings {
     }
 
     @BindingAdapter(value = {"validateMaxLength", "validateMaxLengthMessage"}, requireAll = false)
-    public static void bindingMaxLength(TextView view, int maxLength, CharSequence errorMessage) {
+    public static void bindingMaxLength(TextView view, int maxLength, String errorMessage) {
         EditTextHandler.disableErrorOnChanged(view);
 
         String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
@@ -36,7 +36,7 @@ public class LengthBindings {
     }
 
     @BindingAdapter(value = {"validateEmpty", "validateEmptyMessage"}, requireAll = false)
-    public static void bindingEmpty(TextView view, boolean empty, CharSequence errorMessage) {
+    public static void bindingEmpty(TextView view, boolean empty, String errorMessage) {
         EditTextHandler.disableErrorOnChanged(view);
 
         String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
