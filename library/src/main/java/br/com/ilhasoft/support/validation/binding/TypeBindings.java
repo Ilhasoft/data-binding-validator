@@ -15,9 +15,11 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
  */
 public class TypeBindings {
 
-    @BindingAdapter(value = {"validateType", "validateTypeMessage"}, requireAll = false)
-    public static void bindingTypeValidation(TextView view, String fieldTypeText, String errorMessage) {
-        EditTextHandler.disableErrorOnChanged(view);
+    @BindingAdapter(value = {"validateType", "validateTypeMessage", "validateTypeAutoDismiss"}, requireAll = false)
+    public static void bindingTypeValidation(TextView view, String fieldTypeText, String errorMessage, Boolean autoDismiss) {
+        if (autoDismiss == null || autoDismiss) {
+            EditTextHandler.disableErrorOnChanged(view);
+        }
         TypeRule.FieldType fieldType = getFieldTypeByText(fieldTypeText);
         try {
             String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,

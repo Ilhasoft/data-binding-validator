@@ -25,6 +25,7 @@
                     android:hint="Name"
                     app:validateMinLength="@{4}"
                     app:validateMinLengthMessage="@{@string/custom_error_min_length}"
+                    app:validateMinLengthAutoDismiss="@{false}"
                     app:validateMaxLength="@{10}"
                     app:validateMaxLengthMessage="@{@string/custom_error_max_length}"/>
 
@@ -40,7 +41,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Username"
                     app:validateType='@{"username"}'
-                    app:validateTypeMessage="@{@string/custom_error_username}" />
+                    app:validateTypeMessage="@{@string/custom_error_username}"
+                    app:validateTypeAutoDismiss="@{false}"/>
 
             </android.support.design.widget.TextInputLayout>
 
