@@ -3,6 +3,7 @@
     <string name="error_message_min_length">Campo no válido. El número mínimo de caracteres %1$d</string>
     <string name="error_message_max_length">Campo no válido. El número máximo de caracteres %1$d</string>
     <string name="error_message_date_validation">Formato de datos no válido</string>
+    <string name="error_message_regex_validation">Formato no válido</string>
 
     <string name="error_message_email_validation">Formato de correo electrónico no válido</string>
     <string name="error_message_cpf_validation">Formato de CPF no válido</string>
