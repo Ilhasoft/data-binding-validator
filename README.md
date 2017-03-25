@@ -1,20 +1,186 @@
-# IlhaSoft Support Validation Library
+# Data Binding Validator by Ilhasoft
 
-[![Release](https://jitpack.io/v/org.bitbucket.ilhasoft/support-validation.svg?style=flat-square)](https://jitpack.io/#org.bitbucket.ilhasoft/support-validation)
+[![Release](https://jitpack.io/v/Ilhasoft/data-binding-validator.svg?style=flag-square?style=flat-square)](https://jitpack.io/#Ilhasoft/data-binding-validator)
 
-Biblioteca com objetivo de facilitar e agilizar a criação de formulários. 
+The Data Binding Validator makes it easy and quick to validate fields in forms using data binding framework.
 
-## Recursos disponíveis:
+## Download
 
-* Configuração tamanho mínimo/máximo para campos de texto;
-* Validar inputs baseado no tipo de dados utilizado (email, cartão de crédito, URL e etc);
-* Mensagens pré-definidas traduzidas em vários idiomas;
-* Suporte à [`TextInputLayout`](https://developer.android.com/reference/android/support/design/widget/TextInputLayout.html);
+Step 1: Add it in your root build.gradle at the end of repositories:
 
-## Exemplo de utilização
+```
+allprojects {
+  repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+  }
+}
+```
 
-![Exemplo de utilização](http://s32.postimg.org/7tfrxtd9x/device_2016_05_15_105341.png)
+Step 2: Add the dependency
+```
+  dependencies {
+    compile 'com.github.Ilhasoft:data-binding-validator:LATEST-VERSION'
+  }
+```
+Latest Version: [![Latest version](https://jitpack.io/v/Ilhasoft/data-binding-validator.svg?style=flat-square)](https://jitpack.io/#Ilhasoft/data-binding-validator)
 
-## Como utilizar?
+  
+## Features:
 
-[Documentação oficial](https://bitbucket.org/ilhasoft/support-validation/wiki/Como%20utilizar)
+* Minimum/Maximum length validation for text fields;
+* Validate inputs based on field type (email, credit card, URL, CPF and so on);
+* Pre-defined error messages translated into English, Portuguese and Spanish;
+* Custom error messages by field;
+* Supports [`TextInputLayout`](https://developer.android.com/reference/android/support/design/widget/TextInputLayout.html) and EditText;
+
+## Sample
+
+<img width='380' src='https://raw.githubusercontent.com/Ilhasoft/data-binding-validator/master/screenshot.png'/>
+
+## Usage
+
+### Enabling Data Binding ###
+
+You need to enable Data Binding to use this library, add the following code into your main module's `build.gradle`:
+
+```
+android {
+    ....
+    dataBinding {
+        enabled = true
+    }
+}
+```
+
+### Setting up validations directly on layout ###
+
+It's possible to insert directly on layout creation, the validation on input fields. The error messages in different languages already are configured inside the library, not requiring the adding by developers. These are the existing validation types:
+
+#### Validate Characters Length ####
+
+Adding `validateMinLength` or `validateMaxLength` to your `EditText`, it's possible to configure a minimum or maximum characters length:
+
+```
+<EditText
+  android:id="@+id/name"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:hint="Name"
+  app:validateMinLength="@{4}"
+  app:validateMaxLength="@{10}"/>
+```
+
+#### Validate Empty Characters ####
+
+Adding `validateEmpty`, you can validate if the `EditText` is empty:
+
+```
+<EditText
+  android:id="@+id/hello"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:hint="Name"
+  app:validateEmpty="@{true}" />
+```
+
+#### Validate Date Patterns  ####
+
+Adding `validateDate`, you can set a pattern accepted by the `EditText` such as `dd/MM/yyyy`, `yyyy` and so on:
+
+```
+<EditText
+  android:id="@+id/date"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:hint="Name"
+  app:validateDate='@{"dd/MM/yyyy"}' />
+```
+
+#### Validate Regex  ####
+
+Adding `validateRegex`, you can set a regular expression to be validated, for example:
+
+```
+<EditText
+  android:id="@+id/regex"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:hint="Name"
+  app:validateRegex='@{"[a-zA-Z0-9-._]+"}'
+  app:validateRegexMessage="@{@string/regexErrorMessage}" />
+```
+
+#### Validate Input Types ####
+
+You can even validate input by date, for example Email, URL, Username, CreditCard, CPF, CEP and so on:
+
+```
+<EditText app:validateType='@{"email"}' />
+
+<EditText app:validateType='@{"url"}' />
+
+<EditText app:validateType='@{"creditCard"}' />
+
+<EditText app:validateType='@{"username"}' />
+
+<EditText app:validateType='@{"cpf"}' />
+```
+
+### Applying Validation ###
+
+It will be necessary to instantiate `Validator` passing as argument your `ViewDataBinding` instance got from your layout binding. After that you can call `validate()` that will return if your data is valid or not. Example:
+
+```
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+
+  MainActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
+  final Validator validator = new Validator(binding);
+
+  binding.validate.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+      if (validator.validate()) {
+        saveToDatabase();
+      }
+    }
+  });
+}
+```
+
+### Custom Error Messages ###
+
+You can add custom error messages by using the same validation rule name and adding `Message` at the end, such as `validateTypeMessage`, `validateDateMessage`, `validateRegexMessage` and so on. For example:
+
+```
+<EditText
+  android:id="@+id/date"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:hint="Name"
+  app:validateDate='@{"dd/MM/yyyy"}'
+  app:validateDateMessage="@{@string/dateErrorMessage}" />
+```
+
+### Validation modes ###
+
+The validation can be applied in two way, field by field or the whole form at once. By default, it's configured field by field, however, you can call `validator.enableFormValidationMode();` to enable the validation of the whole form.
+
+If you want to come back to the default way, call `validator.enableFieldValidationMode();`
+
+### Auto dismiss ###
+
+By default, the library auto dismiss the error messages when you start typing again, but it's configurable as well. You can add on your layout validation the same validation rule and adding `AutoDismiss` at the end, which receives a `boolean`. For example:
+
+```
+<EditText
+  android:id="@+id/date"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:hint="Name"
+  app:validateDate='@{"dd/MM/yyyy"}'
+  app:validateDateMessage="@{@string/dateErrorMessage}"
+  app:validateDateAutoDismiss="@{false}" />
+```
