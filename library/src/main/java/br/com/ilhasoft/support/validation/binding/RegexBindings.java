@@ -15,8 +15,8 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
 public class RegexBindings {
 
     @BindingAdapter(value = {"validateRegex", "validateRegexMessage", "validateRegexAutoDismiss"}, requireAll = false)
-    public static void bindingRegex(TextView view, String pattern, String errorMessage, Boolean autoDismiss) {
-        if (autoDismiss == null || autoDismiss) {
+    public static void bindingRegex(TextView view, String pattern, String errorMessage, boolean autoDismiss) {
+        if (autoDismiss) {
             EditTextHandler.disableErrorOnChanged(view);
         }
 

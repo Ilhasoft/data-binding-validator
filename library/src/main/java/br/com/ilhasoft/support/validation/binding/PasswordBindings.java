@@ -15,8 +15,8 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
 public class PasswordBindings {
 
     @BindingAdapter(value = {"validatePassword", "validatePasswordMessage", "validatePasswordAutoDismiss"}, requireAll = false)
-    public static void bindingPassword(TextView view, TextView comparableView, String errorMessage, Boolean autoDismiss) {
-        if (autoDismiss == null || autoDismiss) {
+    public static void bindingPassword(TextView view, TextView comparableView, String errorMessage, boolean autoDismiss) {
+        if (autoDismiss) {
             EditTextHandler.disableErrorOnChanged(view);
         }
 

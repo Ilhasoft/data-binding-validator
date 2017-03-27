@@ -18,8 +18,8 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
 public class LengthBindings {
 
     @BindingAdapter(value = {"validateMinLength", "validateMinLengthMessage", "validateMinLengthAutoDismiss"}, requireAll = false)
-    public static void bindingMinLength(TextView view, int minLength, String errorMessage, Boolean autoDismiss) {
-        if (autoDismiss == null || autoDismiss) {
+    public static void bindingMinLength(TextView view, int minLength, String errorMessage, boolean autoDismiss) {
+        if (autoDismiss) {
             EditTextHandler.disableErrorOnChanged(view);
         }
 
@@ -29,8 +29,8 @@ public class LengthBindings {
     }
 
     @BindingAdapter(value = {"validateMaxLength", "validateMaxLengthMessage", "validateMaxLengthAutoDismiss"}, requireAll = false)
-    public static void bindingMaxLength(TextView view, int maxLength, String errorMessage, Boolean autoDismiss) {
-        if (autoDismiss == null || autoDismiss) {
+    public static void bindingMaxLength(TextView view, int maxLength, String errorMessage, boolean autoDismiss) {
+        if (autoDismiss) {
             EditTextHandler.disableErrorOnChanged(view);
         }
 
@@ -40,8 +40,8 @@ public class LengthBindings {
     }
 
     @BindingAdapter(value = {"validateEmpty", "validateEmptyMessage", "validateEmptyAutoDismiss"}, requireAll = false)
-    public static void bindingEmpty(TextView view, boolean empty, String errorMessage, Boolean autoDismiss) {
-        if (autoDismiss == null || autoDismiss) {
+    public static void bindingEmpty(TextView view, boolean empty, String errorMessage, boolean autoDismiss) {
+        if (autoDismiss) {
             EditTextHandler.disableErrorOnChanged(view);
         }
 

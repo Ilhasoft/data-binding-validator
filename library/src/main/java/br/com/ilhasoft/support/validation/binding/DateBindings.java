@@ -15,8 +15,8 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
 public class DateBindings {
 
     @BindingAdapter(value = {"validateDate", "validateDateMessage", "validateDateAutoDismiss"}, requireAll = false)
-    public static void bindingDate(TextView view, String pattern, String errorMessage, Boolean autoDismiss) {
-        if (autoDismiss == null || autoDismiss) {
+    public static void bindingDate(TextView view, String pattern, String errorMessage, boolean autoDismiss) {
+        if (autoDismiss) {
             EditTextHandler.disableErrorOnChanged(view);
         }
 
