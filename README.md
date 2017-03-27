@@ -25,7 +25,7 @@ Step 2: Add the dependency
 ```
 Latest Version: [![Latest version](https://jitpack.io/v/Ilhasoft/data-binding-validator.svg?style=flat-square)](https://jitpack.io/#Ilhasoft/data-binding-validator)
 
-  
+
 ## Features:
 
 * Minimum/Maximum length validation for text fields;
@@ -172,7 +172,7 @@ If you want to come back to the default way, call `validator.enableFieldValidati
 
 ### Auto dismiss ###
 
-By default, the library auto dismiss the error messages when you start typing again, but it's configurable as well. You can add on your layout validation the same validation rule and adding `AutoDismiss` at the end, which receives a `boolean`. For example:
+By default, the library prompts error messages and doens't dismiss the error automatically, however, you can add on your layout validation the same rule name by adding `AutoDismiss` at the end, which receives a `boolean`. In this case it could dismiss the error automatically. For example:
 
 ```
 <EditText
@@ -182,5 +182,5 @@ By default, the library auto dismiss the error messages when you start typing ag
   android:hint="Name"
   app:validateDate='@{"dd/MM/yyyy"}'
   app:validateDateMessage="@{@string/dateErrorMessage}"
-  app:validateDateAutoDismiss="@{false}" />
+  app:validateDateAutoDismiss="@{true}" />
 ```
