@@ -36,7 +36,7 @@ Latest Version: [![Latest version](https://jitpack.io/v/Ilhasoft/data-binding-va
 
 ## Sample
 
-<img width='380' src='https://raw.githubusercontent.com/Ilhasoft/data-binding-validator/master/screenshot.png'/>
+<img src="usageSample.gif" alt="...">
 
 ## Usage
 
@@ -163,6 +163,10 @@ You can add custom error messages by using the same validation rule name and add
   app:validateDate='@{"dd/MM/yyyy"}'
   app:validateDateMessage="@{@string/dateErrorMessage}" />
 ```
+
+### Validating ###
+
+If you want to validate all the fields, you can simply call `validator.validate()`, to validate specific views you can call `validator.validate(view)` or `validator.validate(viewsList)`;
 
 ### Validation modes ###
 

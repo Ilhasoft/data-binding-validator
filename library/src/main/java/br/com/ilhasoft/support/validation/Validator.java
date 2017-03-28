@@ -35,6 +35,16 @@ public class Validator {
         return isAllViewsValid(viewWithValidations);
     }
 
+    public boolean validate(View view) {
+        List<View> viewWithValidations = getViewsWithValidation(view);
+        return isAllViewsValid(viewWithValidations);
+    }
+
+    public <ViewType extends View> boolean validate(List<ViewType> views) {
+        List<View> viewWithValidations = getViewsWithValidation(views);
+        return isAllViewsValid(viewWithValidations);
+    }
+
     private boolean isAllViewsValid(List<View> viewWithValidations) {
         boolean allViewsValid = true;
         for (View viewWithValidation : viewWithValidations) {
@@ -77,5 +87,13 @@ public class Validator {
             return ViewTagHelper.getViewsByTag((ViewGroup) target.getRoot(), R.id.validator_rule);
         }
         return Collections.singletonList(target.getRoot());
+    }
+
+    private <ViewType extends View> List<View> getViewsWithValidation(List<ViewType> views) {
+        return ViewTagHelper.filterViewsWithTag(R.id.validator_rule, views);
+    }
+
+    private List<View> getViewsWithValidation(View view) {
+        return ViewTagHelper.filterViewWithTag(R.id.validator_rule, view);
     }
 }

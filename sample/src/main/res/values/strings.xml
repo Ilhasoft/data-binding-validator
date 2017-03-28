@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Support Validation</string>
+    <string name="app_name">Data Binding Validator Sample</string>
     <string name="custom_error_username">Custom message: Username not valid</string>
     <string name="custom_error_password_not_equal">Custom message: passwords are not equals!!</string>
     <string name="custom_error_cpf">Custom message: CPF is wrong man!</string>
