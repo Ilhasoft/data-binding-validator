@@ -40,7 +40,7 @@ public class Validator {
         return isAllViewsValid(viewWithValidations);
     }
 
-    public boolean validate(List<View> views) {
+    public <ViewType extends View> boolean validate(List<ViewType> views) {
         List<View> viewWithValidations = getViewsWithValidation(views);
         return isAllViewsValid(viewWithValidations);
     }
@@ -89,7 +89,7 @@ public class Validator {
         return Collections.singletonList(target.getRoot());
     }
 
-    private List<View> getViewsWithValidation(List<View> views) {
+    private <ViewType extends View> List<View> getViewsWithValidation(List<ViewType> views) {
         return ViewTagHelper.filterViewsWithTag(R.id.validator_rule, views);
     }
 

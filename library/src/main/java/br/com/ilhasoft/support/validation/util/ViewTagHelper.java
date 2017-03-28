@@ -41,7 +41,7 @@ public class ViewTagHelper {
         return viewsWithTags;
     }
 
-    public static List<View> filterViewsWithTag(int tagId, List<View> views) {
+    public static <ViewType extends View> List<View> filterViewsWithTag(int tagId, List<ViewType> views) {
         List<View> viewsWithTags = new ArrayList<>();
         for (View view : views) {
             addViewWhenContainsTag(tagId, viewsWithTags, view);
