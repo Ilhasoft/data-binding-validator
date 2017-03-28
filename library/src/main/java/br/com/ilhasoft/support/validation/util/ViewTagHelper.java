@@ -30,14 +30,30 @@ public class ViewTagHelper {
             if (child instanceof ViewGroup) {
                 views.addAll(getViewsByTag((ViewGroup) child, tagId));
             }
-
-            final Object tagValue = child.getTag(tagId);
-            if (tagValue != null) {
-                views.add(child);
-            }
-
+            addViewWhenContainsTag(tagId, views, child);
         }
         return views;
+    }
+
+    public static List<View> filterViewWithTag(int tagId, View view) {
+        List<View> viewsWithTags = new ArrayList<>();
+        addViewWhenContainsTag(tagId, viewsWithTags, view);
+        return viewsWithTags;
+    }
+
+    public static List<View> filterViewsWithTag(int tagId, List<View> views) {
+        List<View> viewsWithTags = new ArrayList<>();
+        for (View view : views) {
+            addViewWhenContainsTag(tagId, viewsWithTags, view);
+        }
+        return viewsWithTags;
+    }
+
+    private static void addViewWhenContainsTag(int tagId, List<View> views, View view) {
+        final Object tagValue = view.getTag(tagId);
+        if (tagValue != null) {
+            views.add(view);
+        }
     }
 
 }
