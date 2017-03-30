@@ -177,6 +177,12 @@
                 android:layout_marginTop="10dp"
                 android:text="Validate All"/>
 
+            <Button
+                android:id="@+id/to_validate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Validate All With Listener"/>
         </LinearLayout>
     </ScrollView>
 </layout>

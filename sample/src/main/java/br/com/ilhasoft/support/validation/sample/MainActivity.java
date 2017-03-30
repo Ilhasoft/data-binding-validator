@@ -1,9 +1,8 @@
 package br.com.ilhasoft.support.validation.sample;
 
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -13,12 +12,22 @@ import java.util.Arrays;
 import br.com.ilhasoft.support.validation.Validator;
 import br.com.ilhasoft.support.validation.sample.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Validator.ValidationListener {
 
     private static final String TAG = "MainActivity";
 
     private ActivityMainBinding binding;
     private Validator validator;
+
+    @Override
+    public void onSuccess() {
+        saveToDatabase();
+    }
+
+    @Override
+    public void onError() {
+        Toast.makeText(MainActivity.this, "Dados inválidos!", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +37,10 @@ public class MainActivity extends AppCompatActivity {
         binding.validateName.setOnClickListener(onValidateNameClickListener);
         binding.validateMultiple.setOnClickListener(onValidateMultipleClickListener);
         binding.validate.setOnClickListener(onValidateAllClickListener);
+        binding.toValidate.setOnClickListener(onValidateAllWithListenerClickListener);
 
         validator = new Validator(binding);
+        validator.setValidationListener(this);
         validator.enableFormValidationMode();
     }
 
@@ -47,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-
     private View.OnClickListener onValidateAllClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -56,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(MainActivity.this, "Dados inválidos!", Toast.LENGTH_SHORT).show();
             }
+        }
+    };
+
+    private View.OnClickListener onValidateAllWithListenerClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            validator.toValidate();
         }
     };
 
