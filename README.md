@@ -150,6 +150,41 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
+Or you can use `toValidate()` if prefer using listener to validation response:
+
+```
+public class YourActivity extends AppCompatActivity implements Validator.ValidationListener {
+
+    ...
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        MainActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
+        final Validator validator = new Validator(binding);
+        validator.setValidationListener(this);
+
+        binding.validate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validator.toValidate()
+            }
+        });
+    }
+
+    @Override
+    public void onSuccess() {
+        saveToDatabase();
+    }
+
+    @Override
+    public void onError() {
+        Toast.makeText(YourActivity.this, "Dados inválidos!", Toast.LENGTH_SHORT).show();
+    }
+}
+```
+
 ### Custom Error Messages ###
 
 You can add custom error messages by using the same validation rule name and adding `Message` at the end, such as `validateTypeMessage`, `validateDateMessage`, `validateRegexMessage` and so on. For example:
