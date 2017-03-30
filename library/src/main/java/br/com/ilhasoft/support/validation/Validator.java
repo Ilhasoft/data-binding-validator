@@ -21,6 +21,7 @@ public class Validator {
     private static final int FORM_VALIDATION_MODE = 1;
 
     private ViewDataBinding target;
+    private ValidationListener validationListener;
 
     private int mode = FIELD_VALIDATION_MODE;
     private final Set<View> disabledViews;
@@ -28,6 +29,20 @@ public class Validator {
     public Validator(ViewDataBinding target) {
         this.target = target;
         this.disabledViews = new HashSet<>();
+    }
+
+    public void setValidationListener(ValidationListener validationListener) {
+        this.validationListener = validationListener;
+    }
+
+    public void toValidate() {
+        if (validationListener == null) throw new IllegalArgumentException("Validation listener should not be null.");
+
+        if (validate()) {
+            validationListener.onSuccess();
+        } else {
+            validationListener.onError();
+        }
     }
 
     public boolean validate() {
@@ -95,5 +110,12 @@ public class Validator {
 
     private List<View> getViewsWithValidation(View view) {
         return ViewTagHelper.filterViewWithTag(R.id.validator_rule, view);
+    }
+
+    public interface ValidationListener {
+
+        void onSuccess();
+
+        void onError();
     }
 }
