@@ -20,12 +20,12 @@ public class MainActivity extends AppCompatActivity implements Validator.Validat
     private Validator validator;
 
     @Override
-    public void onSuccess() {
+    public void onValidationSuccess() {
         saveToDatabase();
     }
 
     @Override
-    public void onError() {
+    public void onValidationError() {
         Toast.makeText(MainActivity.this, "Dados inválidos!", Toast.LENGTH_SHORT).show();
     }
 

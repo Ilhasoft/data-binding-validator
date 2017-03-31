@@ -174,12 +174,12 @@ public class YourActivity extends AppCompatActivity implements Validator.Validat
     }
 
     @Override
-    public void onSuccess() {
+    public void onValidationSuccess() {
         saveToDatabase();
     }
 
     @Override
-    public void onError() {
+    public void onValidationError() {
         Toast.makeText(YourActivity.this, "Dados inválidos!", Toast.LENGTH_SHORT).show();
     }
 }

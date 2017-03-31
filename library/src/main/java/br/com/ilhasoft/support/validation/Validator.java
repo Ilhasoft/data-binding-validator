@@ -39,9 +39,9 @@ public class Validator {
         if (validationListener == null) throw new IllegalArgumentException("Validation listener should not be null.");
 
         if (validate()) {
-            validationListener.onSuccess();
+            validationListener.onValidationSuccess();
         } else {
-            validationListener.onError();
+            validationListener.onValidationError();
         }
     }
 
@@ -114,8 +114,8 @@ public class Validator {
 
     public interface ValidationListener {
 
-        void onSuccess();
+        void onValidationSuccess();
 
-        void onError();
+        void onValidationError();
     }
 }
