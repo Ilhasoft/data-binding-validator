@@ -16,7 +16,7 @@ public class CpfTypeRule extends TypeRule {
     @Override
     protected boolean isValid(TextView view) {
         final String rawCpf = view.getText().toString().trim().replaceAll("[^\\d]", "");
-        return rawCpf.length() == 11
+        return rawCpf.length() == 11 && !onBlackList(rawCpf)
                 && (cpfDv(rawCpf, 1) == Character.getNumericValue(rawCpf.charAt(9))
                 && cpfDv(rawCpf, 2) == Character.getNumericValue(rawCpf.charAt(10)));
     }
@@ -40,6 +40,17 @@ public class CpfTypeRule extends TypeRule {
             sum += ((baseMultiplier - i) * Character.getNumericValue(rawCPF.charAt(i)));
         }
         return sum;
+    }
+
+    // Reference: https://github.com/concretesolutions/canarinho/blob/master/canarinho/src/main/java/br/com/concretesolutions/canarinho/validator/ValidadorCPF.java
+    private boolean onBlackList(String rawCpf) {
+        boolean equal = true;
+        for (int i = 1; i < 11 && equal; i++) {
+            if (rawCpf.charAt(i) != rawCpf.charAt(0)) {
+                equal = false;
+            }
+        }
+        return equal || rawCpf.equals("12345678909");
     }
 
     @Override
