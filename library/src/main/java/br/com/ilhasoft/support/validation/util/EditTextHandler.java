@@ -38,12 +38,15 @@ public class EditTextHandler {
     }
 
     public static void setError(TextView textView, String errorMessage) {
-        TextInputLayout textInputLayout = getTextInputLayout(textView);
-        if (textInputLayout != null) {
-            textInputLayout.setErrorEnabled(!TextUtils.isEmpty(errorMessage));
-            textInputLayout.setError(errorMessage);
-        } else {
-            textView.setError(errorMessage);
+        Boolean b = (Boolean)textView.getTag(R.id.show_error_message);
+        if (!Boolean.FALSE.equals(b)) {
+            TextInputLayout textInputLayout = getTextInputLayout(textView);
+            if (textInputLayout != null) {
+                textInputLayout.setErrorEnabled(!TextUtils.isEmpty(errorMessage));
+                textInputLayout.setError(errorMessage);
+            } else {
+                textView.setError(errorMessage);
+            }
         }
     }
 
