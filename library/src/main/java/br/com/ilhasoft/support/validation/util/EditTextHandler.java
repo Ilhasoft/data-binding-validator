@@ -42,10 +42,13 @@ public class EditTextHandler {
         if (!Boolean.FALSE.equals(b)) {
             TextInputLayout textInputLayout = getTextInputLayout(textView);
             if (textInputLayout != null) {
-                textInputLayout.setErrorEnabled(!TextUtils.isEmpty(errorMessage));
-                textInputLayout.setError(errorMessage);
+                if ((TextUtils.isEmpty(errorMessage) && !TextUtils.isEmpty(textInputLayout.getError())) || (errorMessage != null && !errorMessage.equals(textInputLayout.getError()))) {
+                    textInputLayout.setError(errorMessage);
+                }
             } else {
-                textView.setError(errorMessage);
+                if ((TextUtils.isEmpty(errorMessage) && !TextUtils.isEmpty(textView.getError())) || (errorMessage != null && !errorMessage.equals(textView.getError()))) {
+                    textView.setError(errorMessage);
+                }
             }
         }
     }
