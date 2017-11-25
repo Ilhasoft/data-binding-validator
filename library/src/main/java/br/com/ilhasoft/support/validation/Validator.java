@@ -87,6 +87,7 @@ public class Validator {
             }
 
             if(mode == FIELD_VALIDATION_MODE && !viewValid) {
+                viewWithValidation.requestFocus();
                 break;
             }
         }
