@@ -30,6 +30,7 @@ Latest Version: [![Latest version](https://jitpack.io/v/Ilhasoft/data-binding-va
 
 * Minimum/Maximum length validation for text fields;
 * Validate inputs based on field type (email, credit card, URL, CPF and so on);
+* Custom validation by calling a public static method on a string returning a boolean.
 * Pre-defined error messages translated into English, Portuguese and Spanish;
 * Custom error messages by field;
 * Supports [`TextInputLayout`](https://developer.android.com/reference/android/support/design/widget/TextInputLayout.html) and EditText;
@@ -127,6 +128,27 @@ You can even validate input by date, for example Email, URL, Username, CreditCar
 <EditText app:validateType='@{"cpf"}' />
 ```
 
+#### Validate Custom  ####
+
+Adding `validateCustom`, you can set a public static function do validation, for example:
+
+```
+<EditText
+  android:id="@+id/password"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  app:validateCustom='@{"br.com.ilhasoft.support.validation.sample.MainActivity.validatePassword"}'
+  app:validateCustomMessage="@{@string/custom_error_password_description}"
+  />
+
+// in MainActivity:
+public static boolean validatePassword(String password){
+    return password.matches(".*[a-z].*") &&
+           password.matches(".*[A-Z].*") &&
+           password.matches(".*[0-9].*");
+}
+```
+
 ### Applying Validation ###
 
 It will be necessary to instantiate `Validator` passing as argument your `ViewDataBinding` instance got from your layout binding. After that you can call `validate()` that will return if your data is valid or not. Example:
@@ -222,6 +244,20 @@ By default, the library prompts error messages and doens't dismiss the error aut
   app:validateDate='@{"dd/MM/yyyy"}'
   app:validateDateMessage="@{@string/dateErrorMessage}"
   app:validateDateAutoDismiss="@{true}" />
+```
+
+### Validate each character ###
+
+To validate as the user types, use addTextChangedListener. For example:
+
+```
+binding.password.addTextChangedListener(new TextWatcher() {
+    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+    @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
+    @Override public void afterTextChanged(Editable s) {
+        validator.validate(binding.password);
+    }
+});
 ```
 
 ## License ##

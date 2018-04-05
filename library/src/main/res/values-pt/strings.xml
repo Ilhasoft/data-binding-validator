@@ -4,6 +4,7 @@
     <string name="error_message_max_length">Campo inválido. O número máximo de caracteres é %1$d</string>
     <string name="error_message_date_validation">Formato de data inválido</string>
     <string name="error_message_regex_validation">Formato inválido</string>
+    <string name="error_message_custom_validation">Formato inválido</string>
 
     <string name="error_message_email_validation">Formato do e-mail inválido</string>
     <string name="error_message_cpf_validation">Formato do CPF inválido</string>

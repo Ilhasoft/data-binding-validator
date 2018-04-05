@@ -3,6 +3,8 @@ package br.com.ilhasoft.support.validation.sample;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -38,6 +40,14 @@ public class MainActivity extends AppCompatActivity implements Validator.Validat
         binding.validateMultiple.setOnClickListener(onValidateMultipleClickListener);
         binding.validate.setOnClickListener(onValidateAllClickListener);
         binding.toValidate.setOnClickListener(onValidateAllWithListenerClickListener);
+
+        binding.password.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            @Override public void afterTextChanged(Editable s) {
+                validator.validate(binding.password);
+            }
+        });
 
         validator = new Validator(binding);
         validator.setValidationListener(this);
@@ -78,6 +88,20 @@ public class MainActivity extends AppCompatActivity implements Validator.Validat
 
     private void saveToDatabase() {
         Log.i(TAG, "Salvar os dados no banco de dados");
+    }
+
+    /**
+     * Validate the password has a number an upper case character and a lower case character.
+     *
+     * Note: This is called through the following tag in activity_main:
+     * app:validateCustom='@{"br.com.ilhasoft.support.validation.sample.MainActivity.validatePassword"}'
+     * @param password the string under test
+     * @return true if it's valid
+     */
+    public static boolean validatePassword(String password){
+        return password.matches(".*[a-z].*") &&
+                password.matches(".*[A-Z].*") &&
+                password.matches(".*[0-9].*");
     }
 
 }

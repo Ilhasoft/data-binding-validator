@@ -4,6 +4,7 @@
     <string name="error_message_max_length">Invalid field. The maximum number of characters %1$d</string>
     <string name="error_message_date_validation">Invalid data format</string>
     <string name="error_message_regex_validation">Invalid format</string>
+    <string name="error_message_custom_validation">Invalid format</string>
 
     <string name="error_message_email_validation">Invalid email format</string>
     <string name="error_message_username_validation">Invalid username format</string>
