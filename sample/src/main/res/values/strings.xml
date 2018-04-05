@@ -6,4 +6,5 @@
     <string name="custom_error_date">Custom message: It\'s not a date!</string>
     <string name="custom_error_min_length">Custom message: This message is too small!</string>
     <string name="custom_error_max_length">Custom message: This message is too big!</string>
+    <string name="custom_error_password_description">Custom message: Password has a lower, an upper and a digit!</string>
 </resources>
