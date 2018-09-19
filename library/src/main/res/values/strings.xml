@@ -10,6 +10,7 @@
     <string name="error_message_cpf_validation">Invalid CPF format</string>
     <string name="error_message_url_validation">Invalid url format</string>
     <string name="error_message_credit_card_validation">Invalid credit card format</string>
+    <string name="error_message_phone_number_validation">Invalid phone number format</string>
     <string name="error_message_empty_validation">This field can\'t be empty</string>
     <string name="error_message_not_equal_password">Passwords are not the same</string>
 </resources>

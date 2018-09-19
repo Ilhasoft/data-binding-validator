@@ -34,6 +34,7 @@ public abstract class TypeRule extends Rule<TextView, TypeRule.FieldType> {
         Email(EmailTypeRule.class, R.string.error_message_email_validation),
         Url(UrlTypeRule.class, R.string.error_message_url_validation),
         CreditCard(CreditCardTypeRule.class, R.string.error_message_credit_card_validation),
+        Phone(PhoneNumberRule.class, R.string.error_message_phone_number_validation),
         None;
 
         Class<? extends TypeRule> mClass;
