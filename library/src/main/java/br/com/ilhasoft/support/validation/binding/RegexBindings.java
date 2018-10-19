@@ -16,7 +16,7 @@
 
 package br.com.ilhasoft.support.validation.binding;
 
-import android.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter;
 import android.widget.TextView;
 
 import br.com.ilhasoft.support.validation.R;

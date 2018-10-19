@@ -16,11 +16,10 @@
 
 package br.com.ilhasoft.support.validation.binding;
 
-import android.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter;
 import android.widget.TextView;
 
 import br.com.ilhasoft.support.validation.R;
-import br.com.ilhasoft.support.validation.rule.EmailTypeRule;
 import br.com.ilhasoft.support.validation.rule.EmptyRule;
 import br.com.ilhasoft.support.validation.rule.MaxLengthRule;
 import br.com.ilhasoft.support.validation.rule.MinLengthRule;
