@@ -7,6 +7,9 @@ android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
 
+    // Gradle automatically adds 'android.test.runner' as a dependency.
+    useLibrary 'android.test.runner'
+
     dataBinding {
         enabled true
     }
@@ -17,6 +20,8 @@ android {
         versionCode 3
         versionName "1.0.0"
         consumerProguardFiles 'proguard-rules.pro'
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
@@ -24,7 +29,13 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api 'androidx.appcompat:appcompat:1.0.0'
     api 'com.google.android.material:material:1.0.0'
+    // JUnit 4 framework
     testImplementation 'junit:junit:4.12'
+    // Android annotations
+    androidTestImplementation 'androidx.annotation:annotation:1.0.0'
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
+    androidTestImplementation 'androidx.test:rules:1.1.0-beta02'
 }
 
 // build a jar with source files
