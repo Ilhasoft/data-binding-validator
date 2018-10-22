@@ -16,7 +16,7 @@
 
 package br.com.ilhasoft.support.validation.rule;
 
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 import android.widget.TextView;
 
 import java.lang.reflect.InvocationTargetException;

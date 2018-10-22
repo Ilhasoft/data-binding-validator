@@ -16,7 +16,7 @@
 
 package br.com.ilhasoft.support.validation.util;
 
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 import android.view.View;
 
 /**

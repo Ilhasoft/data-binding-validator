@@ -16,8 +16,8 @@
 
 package br.com.ilhasoft.support.validation.binding;
 
-import android.databinding.BindingAdapter;
-import android.support.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
+import androidx.annotation.NonNull;
 import android.widget.TextView;
 
 import br.com.ilhasoft.support.validation.R;

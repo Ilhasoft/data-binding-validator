@@ -3,6 +3,6 @@
     package="br.com.ilhasoft.support.validation">
 
     <application android:allowBackup="true"
-        android:supportsRtl="true" />
+        android:supportsRtl="true"/>
 
 </manifest>

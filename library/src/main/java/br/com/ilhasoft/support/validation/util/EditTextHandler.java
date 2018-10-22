@@ -16,9 +16,9 @@
 
 package br.com.ilhasoft.support.validation.util;
 
-import android.databinding.adapters.ListenerUtil;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
+import androidx.databinding.adapters.ListenerUtil;
+import androidx.annotation.Nullable;
+import com.google.android.material.textfield.TextInputLayout;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
