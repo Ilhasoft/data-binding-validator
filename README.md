@@ -224,6 +224,15 @@ By default, the library prompts error messages and doens't dismiss the error aut
   app:validateDateAutoDismiss="@{true}" />
 ```
 
+### Hiding validation messages ###
+
+If you want to check if fields are valid but not have the EditText's error message set, add an attribute:  
+```
+app:showErrorMessage='@{false}'
+```  
+This is useful if you're validating as the user types to enable a button - showing an error after the user has only typed one character is not an ideal user experience. You can use the databinding expression to show the message according to your requirements, such as after onFocusChanged when the user navigates out of the field.
+
+
 ## License ##
 
     Copyright 2017-present Ilhasoft
