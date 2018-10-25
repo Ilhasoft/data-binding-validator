@@ -40,7 +40,12 @@ public abstract class Rule<ViewType extends View, ValueType> {
         } else {
             onValidationFailed(view);
         }
-        return valid;
+
+        //if view is not visible then always returns true
+        // so that it doesn't hamper validation success
+        boolean isHidden = (view.getVisibility() != View.VISIBLE);
+
+        return isHidden || valid;
     }
 
     protected abstract boolean isValid(ViewType view);
