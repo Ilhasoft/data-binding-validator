@@ -31,16 +31,23 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
  */
 public class TypeBindings {
 
-    @BindingAdapter(value = {"validateType", "validateTypeMessage", "validateTypeAutoDismiss"}, requireAll = false)
-    public static void bindingTypeValidation(TextView view, String fieldTypeText, String errorMessage, boolean autoDismiss) {
+    @BindingAdapter(value = {
+            "validateType",
+            "validateTypeMessage",
+            "validateTypeAutoDismiss",
+            "validateTypeAllowEmpty"
+    }, requireAll = false)
+    public static void bindingTypeValidation(TextView view, String fieldTypeText, String errorMsg,
+                                             boolean autoDismiss, boolean allowEmpty) {
         if (autoDismiss) {
             EditTextHandler.disableErrorOnChanged(view);
         }
         TypeRule.FieldType fieldType = getFieldTypeByText(fieldTypeText);
         try {
             String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
-                    errorMessage, fieldType.errorMessageId);
-            ViewTagHelper.appendValue(R.id.validator_rule, view, fieldType.instantiate(view, handledErrorMessage));
+                    errorMsg, fieldType.errorMessageId);
+            ViewTagHelper.appendValue(R.id.validator_rule, view, fieldType.instantiate(view,
+                    handledErrorMessage, allowEmpty));
         } catch (Exception ignored) {}
     }
 

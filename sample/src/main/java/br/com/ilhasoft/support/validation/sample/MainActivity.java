@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements Validator.Validat
     private View.OnClickListener onValidateMultipleClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            validator.validate(Arrays.asList(binding.username, binding.email));
+            validator.validate(Arrays.asList(binding.username, binding.email, binding.phone));
         }
     };
 

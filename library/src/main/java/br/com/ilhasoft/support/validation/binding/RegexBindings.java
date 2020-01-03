@@ -30,15 +30,21 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
  */
 public class RegexBindings {
 
-    @BindingAdapter(value = {"validateRegex", "validateRegexMessage", "validateRegexAutoDismiss"}, requireAll = false)
-    public static void bindingRegex(TextView view, String pattern, String errorMessage, boolean autoDismiss) {
+    @BindingAdapter(value = {
+            "validateRegex",
+            "validateRegexMessage",
+            "validateRegexAutoDismiss"
+    }, requireAll = false)
+    public static void bindingRegex(TextView view, String pattern, String errorMessage,
+                                    boolean autoDismiss) {
         if (autoDismiss) {
             EditTextHandler.disableErrorOnChanged(view);
         }
 
         String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
                 errorMessage, R.string.error_message_regex_validation);
-        ViewTagHelper.appendValue(R.id.validator_rule, view, new RegexRule(view, pattern, handledErrorMessage));
+        ViewTagHelper.appendValue(R.id.validator_rule, view,
+                new RegexRule(view, pattern, handledErrorMessage));
     }
 
 }

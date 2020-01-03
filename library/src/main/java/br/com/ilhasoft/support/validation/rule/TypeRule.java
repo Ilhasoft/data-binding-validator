@@ -34,6 +34,7 @@ public abstract class TypeRule extends Rule<TextView, TypeRule.FieldType> {
         Email(EmailTypeRule.class, R.string.error_message_email_validation),
         Url(UrlTypeRule.class, R.string.error_message_url_validation),
         CreditCard(CreditCardTypeRule.class, R.string.error_message_credit_card_validation),
+        PhoneNumber(PhoneNumberTypeRule.class, R.string.error_message_phone_validation),
         None;
 
         Class<? extends TypeRule> mClass;
@@ -46,17 +47,22 @@ public abstract class TypeRule extends Rule<TextView, TypeRule.FieldType> {
 
         FieldType() {}
 
-        public TypeRule instantiate(TextView view, String errorMessage) throws NoSuchMethodException, IllegalAccessException
-                , InvocationTargetException, InstantiationException {
+        public TypeRule instantiate(TextView view, String errorMessage, boolean allowEmpty)
+                throws NoSuchMethodException, IllegalAccessException,
+                InvocationTargetException, InstantiationException {
             if(this != None) {
-                return mClass.getConstructor(TextView.class, String.class).newInstance(view, errorMessage);
+                return mClass.getConstructor(TextView.class, String.class, boolean.class)
+                        .newInstance(view, errorMessage, allowEmpty);
             }
             throw new IllegalStateException("It's not possible to bind a none value type");
         }
     }
 
-    public TypeRule(TextView view, FieldType value, String errorMessage) {
+    protected boolean allowEmpty;
+
+    public TypeRule(TextView view, FieldType value, String errorMessage, boolean allowEmpty) {
         super(view, value, errorMessage);
+        this.allowEmpty = allowEmpty;
     }
 
 }

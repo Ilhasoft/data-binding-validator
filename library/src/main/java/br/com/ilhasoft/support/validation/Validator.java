@@ -52,7 +52,8 @@ public class Validator {
     }
 
     public void toValidate() {
-        if (validationListener == null) throw new IllegalArgumentException("Validation listener should not be null.");
+        if (validationListener == null)
+            throw new IllegalArgumentException("Validation listener should not be null.");
 
         if (validate()) {
             validationListener.onValidationSuccess();
@@ -80,7 +81,7 @@ public class Validator {
         boolean allViewsValid = true;
         for (View viewWithValidation : viewWithValidations) {
             boolean viewValid = true;
-            List<Rule> rules = (List) viewWithValidation.getTag(R.id.validator_rule);
+            List<Rule> rules = (List<Rule>) viewWithValidation.getTag(R.id.validator_rule);
             for (Rule rule : rules) {
                 viewValid = viewValid && isRuleValid(rule);
                 allViewsValid = allViewsValid && viewValid;

@@ -12,4 +12,5 @@
     <string name="error_message_empty_validation">Este campo no puede estar vacío</string>
     <string name="error_message_not_equal_password">Las contraseñas no son similares</string>
     <string name="error_message_username_validation">Formato de nombre de usuario no válido</string>
+    <string name="error_message_phone_validation">Formato de número de teléfono no válido</string>
 </resources>

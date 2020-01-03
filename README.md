@@ -125,6 +125,16 @@ You can even validate input by date, for example Email, URL, Username, CreditCar
 <EditText app:validateType='@{"username"}' />
 
 <EditText app:validateType='@{"cpf"}' />
+
+<EditText app:validateType='@{"phoneNumber"}' />
+```
+
+#### Optional fields ####
+
+You also can validate input only when it contains a some text (except `validateEmpty` and `validateRegex`) using:
+
+```
+<EditText app:validateTypeAllowEmpty="@{true}">
 ```
 
 ### Applying Validation ###

@@ -29,7 +29,7 @@ public class ViewTagHelper {
 
     public static <Type> void appendValue(int tagId, View view, Type value) {
         Object object = view.getTag(tagId);
-        if(object != null && object instanceof List) {
+        if(object instanceof List) {
             ((List<Type>)object).add(value);
         } else {
             List<Type> typeList = new ArrayList<>();

@@ -25,14 +25,15 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class CpfTypeRule extends TypeRule {
 
-    public CpfTypeRule(TextView view, String errorMessage) {
-        super(view, FieldType.Cpf, errorMessage);
+    public CpfTypeRule(TextView view, String errorMessage, boolean allowEmpty) {
+        super(view, FieldType.Cpf, errorMessage, allowEmpty);
     }
 
     @Override
     protected boolean isValid(TextView view) {
         final String rawCpf = view.getText().toString().trim().replaceAll("[^\\d]", "");
-        return rawCpf.length() == 11 && !onBlackList(rawCpf)
+        return (allowEmpty && rawCpf.length() == 0)
+                || rawCpf.length() == 11 && !onBlackList(rawCpf)
                 && (cpfDv(rawCpf, 1) == Character.getNumericValue(rawCpf.charAt(9))
                 && cpfDv(rawCpf, 2) == Character.getNumericValue(rawCpf.charAt(10)));
     }
