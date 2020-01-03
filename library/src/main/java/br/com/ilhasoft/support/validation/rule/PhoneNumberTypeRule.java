@@ -19,8 +19,6 @@ package br.com.ilhasoft.support.validation.rule;
 import android.util.Patterns;
 import android.widget.TextView;
 
-import java.util.regex.Pattern;
-
 import br.com.ilhasoft.support.validation.util.EditTextHandler;
 
 /**
@@ -29,14 +27,13 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
 public class PhoneNumberTypeRule extends TypeRule {
 
     public PhoneNumberTypeRule(TextView view, String errorMessage, boolean allowEmpty) {
-        super(view, FieldType.Email, errorMessage, allowEmpty);
+        super(view, FieldType.PhoneNumber, errorMessage, allowEmpty);
     }
 
     @Override
     protected boolean isValid(TextView view) {
-        Pattern phonePattern = Patterns.PHONE;
         String phone = view.getText().toString();
-        return (allowEmpty && phone.length() == 0) || phonePattern.matcher(phone).matches();
+        return (allowEmpty && phone.length() == 0) || Patterns.PHONE.matcher(phone).matches();
     }
 
     @Override
