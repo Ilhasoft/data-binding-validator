@@ -29,14 +29,15 @@ public class CreditCardTypeRule extends TypeRule {
 
     private final CreditCardValidator creditCardValidator;
 
-    public CreditCardTypeRule(TextView view, String errorMessage) {
-        super(view, FieldType.CreditCard, errorMessage);
+    public CreditCardTypeRule(TextView view, String errorMessage, boolean allowEmpty) {
+        super(view, FieldType.CreditCard, errorMessage, allowEmpty);
         creditCardValidator = new CreditCardValidator();
     }
 
     @Override
     protected boolean isValid(TextView view) {
-        return creditCardValidator.isValid(view.getText().toString().replaceAll("\\s", ""));
+        String number = view.getText().toString().replaceAll("\\s", "");
+        return (allowEmpty && number.length() == 0) || creditCardValidator.isValid(number);
     }
 
     @Override

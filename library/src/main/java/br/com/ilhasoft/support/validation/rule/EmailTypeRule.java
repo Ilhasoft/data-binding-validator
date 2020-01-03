@@ -29,14 +29,15 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class EmailTypeRule extends TypeRule {
 
-    public EmailTypeRule(TextView view, String errorMessage) {
-        super(view, FieldType.Email, errorMessage);
+    public EmailTypeRule(TextView view, String errorMessage, boolean allowEmpty) {
+        super(view, FieldType.Email, errorMessage, allowEmpty);
     }
 
     @Override
     protected boolean isValid(TextView view) {
         Pattern emailPattern = Patterns.EMAIL_ADDRESS;
-        return emailPattern.matcher(view.getText()).matches();
+        String email = view.getText().toString();
+        return (allowEmpty && email.length() == 0) || emailPattern.matcher(email).matches();
     }
 
     @Override

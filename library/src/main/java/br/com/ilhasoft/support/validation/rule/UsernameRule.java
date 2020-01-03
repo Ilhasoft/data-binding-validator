@@ -26,14 +26,14 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
  */
 public class UsernameRule extends TypeRule {
 
-    public UsernameRule(TextView view, String errorMessage) {
-        super(view, FieldType.Username, errorMessage);
+    public UsernameRule(TextView view, String errorMessage, boolean allowEmpty) {
+        super(view, FieldType.Username, errorMessage, allowEmpty);
     }
 
     @Override
     protected boolean isValid(TextView view) {
         String username = view.getText().toString();
-        return username.matches("[a-zA-Z0-9-._]+");
+        return (allowEmpty && username.length() == 0) || username.matches("[a-zA-Z0-9-._]+");
     }
 
     @Override

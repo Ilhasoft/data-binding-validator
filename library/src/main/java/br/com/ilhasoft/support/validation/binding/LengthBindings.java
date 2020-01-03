@@ -32,37 +32,57 @@ import br.com.ilhasoft.support.validation.util.ViewTagHelper;
  */
 public class LengthBindings {
 
-    @BindingAdapter(value = {"validateMinLength", "validateMinLengthMessage", "validateMinLengthAutoDismiss"}, requireAll = false)
-    public static void bindingMinLength(TextView view, int minLength, String errorMessage, boolean autoDismiss) {
+    @BindingAdapter(value = {
+            "validateMinLength",
+            "validateMinLengthMessage",
+            "validateMinLengthAutoDismiss",
+            "validateMinLengthAllowEmpty"
+    }, requireAll = false)
+    public static void bindingMinLength(TextView view, int minLength, String errorMessage,
+                                        boolean autoDismiss, boolean allowEmpty) {
         if (autoDismiss) {
             EditTextHandler.disableErrorOnChanged(view);
         }
 
         String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
                 errorMessage, R.string.error_message_min_length, minLength);
-        ViewTagHelper.appendValue(R.id.validator_rule, view, new MinLengthRule(view, minLength, handledErrorMessage));
+        ViewTagHelper.appendValue(R.id.validator_rule, view,
+                new MinLengthRule(view, minLength, handledErrorMessage, allowEmpty));
     }
 
-    @BindingAdapter(value = {"validateMaxLength", "validateMaxLengthMessage", "validateMaxLengthAutoDismiss"}, requireAll = false)
-    public static void bindingMaxLength(TextView view, int maxLength, String errorMessage, boolean autoDismiss) {
+    @BindingAdapter(value = {
+            "validateMaxLength",
+            "validateMaxLengthMessage",
+            "validateMaxLengthAutoDismiss",
+            "validateMaxLengthAllowEmpty"
+    }, requireAll = false)
+    public static void bindingMaxLength(TextView view, int maxLength, String errorMessage,
+                                        boolean autoDismiss, boolean allowEmpty) {
         if (autoDismiss) {
             EditTextHandler.disableErrorOnChanged(view);
         }
 
         String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
                 errorMessage, R.string.error_message_max_length, maxLength);
-        ViewTagHelper.appendValue(R.id.validator_rule, view, new MaxLengthRule(view, maxLength, handledErrorMessage));
+        ViewTagHelper.appendValue(R.id.validator_rule, view,
+                new MaxLengthRule(view, maxLength, handledErrorMessage, allowEmpty));
     }
 
-    @BindingAdapter(value = {"validateEmpty", "validateEmptyMessage", "validateEmptyAutoDismiss"}, requireAll = false)
-    public static void bindingEmpty(TextView view, boolean empty, String errorMessage, boolean autoDismiss) {
+    @BindingAdapter(value = {
+            "validateEmpty",
+            "validateEmptyMessage",
+            "validateEmptyAutoDismiss"
+    }, requireAll = false)
+    public static void bindingEmpty(TextView view, boolean empty, String errorMessage,
+                                    boolean autoDismiss) {
         if (autoDismiss) {
             EditTextHandler.disableErrorOnChanged(view);
         }
 
         String handledErrorMessage = ErrorMessageHelper.getStringOrDefault(view,
                 errorMessage, R.string.error_message_empty_validation);
-        ViewTagHelper.appendValue(R.id.validator_rule, view, new EmptyRule(view, empty, handledErrorMessage));
+        ViewTagHelper.appendValue(R.id.validator_rule, view,
+                new EmptyRule(view, empty, handledErrorMessage));
     }
 
 }

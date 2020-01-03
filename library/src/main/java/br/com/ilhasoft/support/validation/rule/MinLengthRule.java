@@ -24,15 +24,15 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
 /**
  * Created by john-mac on 5/14/16.
  */
-public class MinLengthRule extends Rule<TextView, Integer> {
+public class MinLengthRule extends OptionalRule<TextView, Integer> {
 
-    public MinLengthRule(TextView view, Integer value, String errorMessage) {
-        super(view, value, errorMessage);
+    public MinLengthRule(TextView view, Integer value, String errorMessage, boolean allowEmpty) {
+        super(view, value, errorMessage, allowEmpty);
     }
 
     @Override
     public boolean isValid(TextView view) {
-        return view.length() >= value;
+        return (allowEmpty && view.length() == 0) || view.length() >= value;
     }
 
     @Override

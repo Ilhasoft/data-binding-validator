@@ -25,18 +25,19 @@ import br.com.ilhasoft.support.validation.util.EditTextHandler;
 /**
  * Created by john-mac on 6/16/16.
  */
-public class DateRule extends Rule<TextView, String> {
+public class DateRule extends OptionalRule<TextView, String> {
 
     private final DateValidator dateValidator;
 
-    public DateRule(TextView view, String value, String errorMessage) {
-        super(view, value, errorMessage);
+    public DateRule(TextView view, String value, String errorMessage, boolean allowEmpty) {
+        super(view, value, errorMessage, allowEmpty);
         dateValidator = new DateValidator();
     }
 
     @Override
     public boolean isValid(TextView view) {
-        return dateValidator.isValid(view.getText().toString(), value);
+        String date = view.getText().toString();
+        return (allowEmpty && date.length() == 0) || dateValidator.isValid(date, value);
     }
 
     @Override

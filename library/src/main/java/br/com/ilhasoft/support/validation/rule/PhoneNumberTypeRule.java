@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017-present Ilhasoft.
+ * Copyright (c) 2020-present ConteDevel, DT.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,27 @@
 
 package br.com.ilhasoft.support.validation.rule;
 
-import android.webkit.URLUtil;
+import android.util.Patterns;
 import android.widget.TextView;
 
-import br.com.ilhasoft.support.validation.R;
+import java.util.regex.Pattern;
+
 import br.com.ilhasoft.support.validation.util.EditTextHandler;
 
 /**
- * Created by john-mac on 5/14/16.
+ * Created by Denis Sologub on 1/3/20.
  */
-public class UrlTypeRule extends TypeRule {
+public class PhoneNumberTypeRule extends TypeRule {
 
-    public UrlTypeRule(TextView textView, String errorMessage, boolean allowEmpty) {
-        super(textView, FieldType.Url, errorMessage, allowEmpty);
+    public PhoneNumberTypeRule(TextView view, String errorMessage, boolean allowEmpty) {
+        super(view, FieldType.Email, errorMessage, allowEmpty);
     }
 
     @Override
     protected boolean isValid(TextView view) {
-        String url = view.getText().toString();
-        return (allowEmpty && url.length() == 0) || URLUtil.isValidUrl(url);
+        Pattern phonePattern = Patterns.PHONE;
+        String phone = view.getText().toString();
+        return (allowEmpty && phone.length() == 0) || phonePattern.matcher(phone).matches();
     }
 
     @Override
@@ -49,3 +51,4 @@ public class UrlTypeRule extends TypeRule {
         EditTextHandler.setError(view, errorMessage);
     }
 }
+
