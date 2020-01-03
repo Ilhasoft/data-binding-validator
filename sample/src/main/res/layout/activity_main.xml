@@ -59,9 +59,10 @@
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="Email (Optional)"
                     app:validateType='@{"email"}'
-                    app:validateTypeAutoDismiss="@{true}"/>
+                    app:validateTypeAutoDismiss="@{true}"
+                    app:validateTypeAllowEmpty="@{true}"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

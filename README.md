@@ -127,6 +127,14 @@ You can even validate input by date, for example Email, URL, Username, CreditCar
 <EditText app:validateType='@{"cpf"}' />
 ```
 
+#### Optional fields ####
+
+You also can validate input only when it contains a some text (except `validateEmpty` and `validateRegex`) using:
+
+```
+<EditText app:validateTypeAllowEmpty="@{true}">
+```
+
 ### Applying Validation ###
 
 It will be necessary to instantiate `Validator` passing as argument your `ViewDataBinding` instance got from your layout binding. After that you can call `validate()` that will return if your data is valid or not. Example:
